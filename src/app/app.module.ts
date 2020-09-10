@@ -13,9 +13,11 @@ import { appReducer } from './store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './store/app.effects';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../app/shared/header/header.component';
 import { JwtInterceptorInterceptor, ErrorInterceptorInterceptor, fakeBackendProvider } from './helpers';
+import { FooterComponent } from './shared/footer/footer.component';
+import { ToggleComponent } from './shared/toggle/toggle.component';
 
 @NgModule({
   declarations: [
@@ -25,17 +27,20 @@ import { JwtInterceptorInterceptor, ErrorInterceptorInterceptor, fakeBackendProv
     LoginComponent,
     RegisterComponent,
     LoginUserComponent,
-    HeaderComponent
+    HeaderComponent,
+    ToggleComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     StoreModule.forRoot({
       appModel: appReducer,
     }),
     EffectsModule.forRoot([AppEffects]),
-    HttpClientModule,
-    ReactiveFormsModule
+    HttpClientModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorInterceptor, multi: true },

@@ -1,0 +1,22 @@
+.app-footer {
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: #33c2cc;
+
+  &__copyright {
+    display: block;
+    padding: 2rem;
+    text-align: right;
+    width: 44rem;
+
+    &-logo {
+      width: 40%;
+    }
+
+    &-text {
+      font-size: 1.75rem;
+      color: var(--text-color);
+      line-height: 1;
+    }
+  }
+}

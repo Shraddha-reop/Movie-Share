@@ -7,6 +7,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { provideMockStore } from '@ngrx/store/testing';
+import { ToggleComponent } from 'src/app/shared/toggle/toggle.component';
+import { FooterComponent } from 'src/app/shared/footer/footer.component';
+import { ButtonComponent } from 'src/app/shared/button/button.component';
 
 describe('InteriorPageComponent', () => {
   let component: InteriorPageComponent;
@@ -14,24 +17,24 @@ describe('InteriorPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InteriorPageComponent, HeaderComponent],
+      declarations: [InteriorPageComponent, HeaderComponent, ToggleComponent, FooterComponent, ButtonComponent],
       imports: [FormsModule,
         ReactiveFormsModule,
         RouterTestingModule,
         BrowserAnimationsModule,
         HttpClientTestingModule],
-        providers: [
-          provideMockStore({
-            initialState: {
-              appModel: {
-                data: [],
-                isLoggedIn: false,
-                requestBody: {},
-                id: 1
-              }
+      providers: [
+        provideMockStore({
+          initialState: {
+            appModel: {
+              data: [],
+              isLoggedIn: false,
+              requestBody: {},
+              id: 1
             }
-          })
-        ]
+          }
+        })
+      ]
     })
       .compileComponents();
   });

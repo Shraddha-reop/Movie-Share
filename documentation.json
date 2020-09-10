@@ -4,7 +4,7 @@
     "injectables": [
         {
             "name": "AccountService",
-            "id": "injectable-AccountService-345efda15d7fbf40fe2e33dde92d26a0",
+            "id": "injectable-AccountService-2fa415506b86201fb559cd3d32408596",
             "file": "src/app/services/account.service.ts",
             "properties": [
                 {
@@ -91,7 +91,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 48,
+                    "line": 49,
                     "jsdoctags": [
                         {
                             "name": "user",
@@ -104,7 +104,7 @@
                 }
             ],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { BehaviorSubject, Observable } from 'rxjs';\nimport { Router } from '@angular/router';\nimport { HttpClient } from '@angular/common/http';\nimport { map } from 'rxjs/operators';\nimport { User } from '../models/user';\nimport { environment } from '../../environments/environment';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../app.model';\nimport { IsLoggedIn } from '../store/app.actions';\n\n@Injectable({\n    providedIn: 'root'\n})\nexport class AccountService {\n    private userSubject: BehaviorSubject<User>;\n    public user: Observable<User>;\n\n    constructor(\n        private router: Router,\n        private http: HttpClient,\n        public store: Store<AppState>\n    ) {\n        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));\n        this.user = this.userSubject.asObservable();\n    }\n\n    public get userValue(): User {\n        return this.userSubject.value;\n    }\n\n    login(username, password) {\n        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })\n            .pipe(map(user => {\n                localStorage.setItem('user', JSON.stringify(user));\n                this.userSubject.next(user);\n                return user;\n            }));\n    }\n\n    logout() {\n        localStorage.removeItem('user');\n        this.userSubject.next(null);\n        this.router.navigate(['/home']);\n        this.store.dispatch(new IsLoggedIn(false));\n    }\n\n    register(user) {\n        return this.http.post(`${environment.apiUrl}/users/register`, user);\n    }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { BehaviorSubject, Observable } from 'rxjs';\nimport { Router } from '@angular/router';\nimport { HttpClient } from '@angular/common/http';\nimport { map } from 'rxjs/operators';\nimport { User } from '../models/user';\nimport { environment } from '../../environments/environment';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../app.model';\nimport { IsLoggedIn } from '../store/app.actions';\n\n@Injectable({\n    providedIn: 'root'\n})\nexport class AccountService {\n    private userSubject: BehaviorSubject<User>;\n    public user: Observable<User>;\n\n    constructor(\n        private router: Router,\n        private http: HttpClient,\n        public store: Store<AppState>\n    ) {\n        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));\n        this.user = this.userSubject.asObservable();\n    }\n\n    public get userValue(): User {\n        return this.userSubject.value;\n    }\n\n    login(username, password) {\n        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })\n            .pipe(map(user => {\n                localStorage.setItem('user', JSON.stringify(user));\n                this.userSubject.next(user);\n                return user;\n            }));\n    }\n\n    logout() {\n        console.log(\"logout\");\n        localStorage.removeItem('user');\n        this.userSubject.next(null);\n        this.router.navigate(['/home']);\n        this.store.dispatch(new IsLoggedIn(false));\n    }\n\n    register(user) {\n        return this.http.post(`${environment.apiUrl}/users/register`, user);\n    }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1861,7 +1861,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".text-btn {\r\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\r\n  font-weight: 700;\r\n  border: 0;\r\n  border-radius: 3em;\r\n  cursor: pointer;\r\n  display: inline-block;\r\n  line-height: 1;\r\n  font-size: 16px;\r\n  padding: 12px 24px;\r\n  }\r\n  \r\n  .img-btn {\r\n    position: \"relative\";\r\n    background-color: none;\r\n    width: \"100px\";\r\n    height: \"100px\";\r\n    cursor: pointer;\r\n    background-color: white;\r\n    border: none;\r\n  }\r\n  ",
+                    "data": ".text-btn {\r\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\r\n  font-weight: 700;\r\n  border: 0;\r\n  border-radius: 3em;\r\n  cursor: pointer;\r\n  display: inline-block;\r\n  line-height: 1;\r\n  font-size: 16px;\r\n  padding: 12px 24px;\r\n  color: var(--text-color);\r\n  }\r\n  \r\n  .img-btn {\r\n    position: \"relative\";\r\n    background-color: none;\r\n    width: \"100px\";\r\n    height: \"100px\";\r\n    cursor: pointer;\r\n    background-color: white;\r\n    border: none;\r\n  }\r\n  ",
                     "styleUrl": "./button.component.scss"
                 }
             ],
@@ -1879,6 +1879,67 @@
             "duplicateId": 1,
             "duplicateName": "ButtonComponent-1",
             "templateData": "<ng-container *ngIf=\"buttonConfig?.text then text else image\">\n</ng-container>\n<ng-template #text>\n <button type=\"button\" class=\"text-btn\">\n {{ buttonConfig?.text}}\n </button>\n</ng-template>\n<ng-template #image>\n    <button class=\"img-btn\"><img alt=\"image button\" [src]=\"buttonConfig?.src\"></button>\n</ng-template>"
+        },
+        {
+            "name": "FooterComponent",
+            "id": "component-FooterComponent-553595e88a91aa9276029346f56c2e6b",
+            "file": "src/app/shared/footer/footer.componet.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-footer",
+            "styleUrls": [
+                "./footer.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./footer.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "year",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 9,
+                    "modifierKind": [
+                        114
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 11
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n    selector: 'app-footer',\r\n    templateUrl: './footer.component.html',\r\n    styleUrls: ['./footer.component.scss']\r\n})\r\nexport class FooterComponent implements OnInit {\r\n    public year: number;\r\n\r\n    ngOnInit() {\r\n        this.year = new Date().getFullYear();\r\n    }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "\r\n.app-footer {\r\n  display: flex;\r\n  flex-direction: row-reverse;\r\n  padding: 4rem 4rem 5rem;\r\n\r\n  &__copyright {\r\n    display: block;\r\n    padding: 2rem;\r\n    text-align: right;\r\n    width: 44rem;\r\n\r\n    &-logo {\r\n      width: 40%;\r\n    }\r\n\r\n    &-text {\r\n      font-size: 1.75rem;\r\n      color: color(blue, 800);\r\n      line-height: 1.0;\r\n    }\r\n  }\r\n}\r\n",
+                    "styleUrl": "./footer.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"app-footer\">\r\n    <div class=\"app-footer__copyright\">\r\n      <img class=\"app-footer__copyright-logo\" src=\"../../../assets/img/movieSharelogo.PNG\" alt=\"Movie Share logo\">\r\n      <p class=app-footer__copyright-text>&copy;Sapience Analytics 2010-{{year}}</p>\r\n    </div>\r\n  </div>"
         },
         {
             "name": "HeaderComponent",
@@ -1944,7 +2005,7 @@
         },
         {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-ed699f147e96546c7c4d14211a032608-1",
+            "id": "component-HeaderComponent-4b6f45f0e18bfbd42884f8ce2ed4b610-1",
             "file": "src/app/shared/header/header.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1963,19 +2024,44 @@
             "inputsClass": [
                 {
                     "name": "isLoggedIn",
-                    "line": 12
+                    "line": 14
                 }
             ],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "darkTheme",
+                    "defaultValue": "new FormControl(false)",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                }
+            ],
             "methodsClass": [
+                {
+                    "name": "logout",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31
+                },
+                {
+                    "name": "logt",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 35
+                },
                 {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 15
+                    "line": 28
                 }
             ],
             "hostBindings": [],
@@ -1983,11 +2069,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit, Input} from '@angular/core';\nimport classnames from 'classnames';\nimport { AccountService } from 'src/app/services';\n\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.scss']\n})\nexport class HeaderComponent implements OnInit {\n\n  @Input() isLoggedIn;\n\n  constructor(private accountService: AccountService) { }\n  ngOnInit(): void {\n  }\n\n  // logout() {\n  //   this.accountService.logout();\n  // }\n}\n\n\n\n",
+            "sourceCode": "import { Component, OnInit, Input } from '@angular/core';\nimport classnames from 'classnames';\nimport { AccountService } from 'src/app/services';\nimport { FormControl } from '@angular/forms';\nimport { ThemeService } from 'src/app/services/theme.service';\n\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.scss']\n})\nexport class HeaderComponent implements OnInit {\n\n  @Input() isLoggedIn;\n\n  darkTheme = new FormControl(false);\n  constructor(private accountService: AccountService, private themeService: ThemeService) {\n\n    this.darkTheme.valueChanges.subscribe(value => {\n      if (value) {\n        this.themeService.toggleDark();\n      } else {\n        this.themeService.toggleLight();\n      }\n    });\n\n  }\n  ngOnInit(): void {\n  }\n\n  logout() {\n    this.accountService.logout();\n  }\n\n  logt() {\n    this.accountService.logout();\n  }\n}\n\n\n\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "$cls: \".app-header\";\r\n\r\n:host(#{$cls}) {\r\n  display: block;\r\n}\r\n\r\n#{$cls} {\r\n  &__container {\r\n    align-items: center;\r\n    display: flex;\r\n    width: 100%;\r\n    background-color: #267483;\r\n    h1{\r\n      color: white;\r\n      padding: 0 4rem;\r\n    }\r\n  }\r\n  &__content {\r\n    align-items: center;\r\n    display: flex;\r\n    flex: 0 0 auto;\r\n    max-height: 5rem;\r\n    // background-color: #33c2cc;\r\n  }\r\n\r\n  &__nav {\r\n    align-items: center;\r\n    display: flex;\r\n    flex: 1 1 auto;\r\n    justify-content: flex-end;\r\n    min-height: 7rem;\r\n    background-color: #33c2cc;\r\n    a{\r\n      font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\r\n      font-weight: 700;\r\n      border: 0;\r\n      border-radius: 3em;\r\n      cursor: pointer;\r\n      display: inline-block;\r\n      line-height: 1;\r\n      font-size: 16px;\r\n      padding: 12px 24px;\r\n      background-color: #267483;\r\n      text-decoration: none;\r\n      color: white;\r\n      margin-left: 1rem;\r\n    }\r\n  }\r\n  \r\n}\r\n",
+                    "data": "$cls: \".app-header\";\r\n\r\n:host {\r\n  background-color: var(--primary-color);\r\n  color: var(--text-color);\r\n}\r\n\r\n:host(#{$cls}) {\r\n  display: block;\r\n}\r\n\r\n#{$cls} {\r\n  &__container {\r\n    align-items: center;\r\n    display: flex;\r\n    width: 100%;\r\n    background-color: #267483;\r\n    h1 {\r\n      color: var(--text-color);\r\n      padding: 0 4rem;\r\n    }\r\n    img {\r\n      height: 9rem;\r\n      width: 17rem;\r\n    }\r\n  }\r\n  &__content {\r\n    align-items: center;\r\n    display: flex;\r\n    flex: 0 0 auto;\r\n    max-height: 19rem;\r\n    @media screen and (min-width: 320px) and (max-width: 480px) {\r\n      width: 84px;\r\n      h1 {\r\n        padding: 0;\r\n      }\r\n      &_app-logo {\r\n        height: 9rem;\r\n        width: 17rem;\r\n      }\r\n    }\r\n  }\r\n\r\n  &__nav {\r\n    align-items: center;\r\n    display: flex;\r\n    flex: 1 1 auto;\r\n    justify-content: flex-end;\r\n    min-height: 7rem;\r\n    background-color: #33c2cc;\r\n    a {\r\n      font-family: \"Nunito Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n      font-weight: 700;\r\n      border: 0;\r\n      border-radius: 3em;\r\n      cursor: pointer;\r\n      display: inline-block;\r\n      line-height: 1;\r\n      font-size: 16px;\r\n      padding: 12px 24px;\r\n      background-color: #267483;\r\n      text-decoration: none;\r\n      color: var(--text-color);\r\n      margin-left: 1rem;\r\n    }\r\n    button {\r\n      font-family: \"Nunito Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n      font-weight: 700;\r\n      border: 0;\r\n      border-radius: 3em;\r\n      cursor: pointer;\r\n      display: inline-block;\r\n      line-height: 1;\r\n      font-size: 16px;\r\n      padding: 12px 24px;\r\n      background-color: #267483;\r\n      text-decoration: none;\r\n      color: var(--text-color);\r\n      margin-left: 1rem;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./header.component.scss"
                 }
             ],
@@ -1999,13 +2085,24 @@
                     {
                         "name": "accountService",
                         "type": "AccountService"
+                    },
+                    {
+                        "name": "themeService",
+                        "type": "ThemeService"
                     }
                 ],
-                "line": 12,
+                "line": 16,
                 "jsdoctags": [
                     {
                         "name": "accountService",
                         "type": "AccountService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "themeService",
+                        "type": "ThemeService",
                         "tagName": {
                             "text": "param"
                         }
@@ -2018,7 +2115,7 @@
             "isDuplicate": true,
             "duplicateId": 1,
             "duplicateName": "HeaderComponent-1",
-            "templateData": "<header class=\"app-header__container\">\n    <div class=\"app-header__content\">\n        <h1>Movie Share</h1>\n    </div>\n    <nav *ngIf=\"isLoggedIn ; else logout\" class=\"app-header__nav\">\n        <button (click)=\"logout()\">Logout</button>\n    </nav>\n    <ng-template #logout>\n        <nav class=\"app-header__nav\">\n            <a alt= \"Login\" routerLink=\"/login\">Login</a>\n            <a alt=\"Register\"  routerLink=\"/register\">Register\n            </a>\n        </nav>\n       </ng-template>\n    <nav></nav>\n</header>"
+            "templateData": "<header class=\"app-header__container\">\n    <div class=\"app-header__content\">\n        <!-- <h1>Movie Share</h1> -->\n        <img  src=\"../../../assets/img/movieSharelogo.PNG\" alt=\"Movie Share logo\">\n    </div>\n    <nav *ngIf=\"isLoggedIn ; else logout\" class=\"app-header__nav\">\n        <button (click)=\"logt()\">Logout</button>\n        <app-toggle id=\"darkTheme\" [formControl]=\"darkTheme\"></app-toggle>\n        \n        <!-- <app-button  [buttonConfig]=\"{text: 'Logout'}\" (click)=\"logt()\"></app-button>\n        <app-button  [buttonConfig]=\"{text: 'Logout'}\" ></app-button> -->\n    </nav>\n    <ng-template #logout>\n        <nav class=\"app-header__nav\">\n            <a alt=\"Login\" routerLink=\"/login\">Login</a>\n            <a alt=\"Register\" routerLink=\"/register\">Register\n            </a>\n            <app-toggle id=\"darkTheme\" [formControl]=\"darkTheme\"></app-toggle>\n            <app-button [buttonConfig]=\"{text: 'Logout'}\"></app-button>\n\n        </nav>\n    </ng-template>\n</header>"
         },
         {
             "name": "HomeComponent",
@@ -2281,7 +2378,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<article>\n    <app-header [isLoggedIn] = \"isLoggedIn\" >\n    </app-header>\n    <router-outlet>\n    </router-outlet>\n    <footer>\n    </footer> \n</article>"
+            "templateData": "<article>\n    <app-header [isLoggedIn] = \"isLoggedIn\" >\n    </app-header>\n    <router-outlet>\n    </router-outlet>\n   <app-footer></app-footer>\n</article>"
         },
         {
             "name": "LoginComponent",
@@ -2714,6 +2811,62 @@
                 }
             },
             "templateData": "\n<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n    <h1>Register</h1>\n    <h1 class=\"err\">{{error}}</h1>\n    <div class=\"container\">\n        <label for=\"firstName\">First Name</label>\n        <input type=\"text\" formControlName=\"firstName\" />\n        <div *ngIf=\"submitted && f.firstName.errors\">\n            <div *ngIf=\"f.firstName.errors.required\">First Name is required</div>\n        </div>\n        <label for=\"lastName\">Last Name</label>\n        <input type=\"text\" formControlName=\"lastName\" [ngClass]=\"{ 'is-invalid': submitted && f.lastName.errors }\" />\n        <div *ngIf=\"submitted && f.lastName.errors\">\n            <div *ngIf=\"f.lastName.errors.required\">Last Name is required</div>\n        </div>\n    \n    \n        <label for=\"username\">Username</label>\n        <input type=\"text\" formControlName=\"username\" [ngClass]=\"{ 'is-invalid': submitted && f.username.errors }\" />\n        <div *ngIf=\"submitted && f.username.errors\">\n            <div *ngIf=\"f.username.errors.required\">Username is required</div>\n        </div>\n\n    \n        <label for=\"password\">Password</label>\n        <input type=\"password\" formControlName=\"password\"\n            [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\" />\n        <div *ngIf=\"submitted && f.password.errors\">\n            <div *ngIf=\"f.password.errors.required\">Password is required</div>\n            <div *ngIf=\"f.password.errors.minlength\">Password must be at least 6 characters</div>\n        </div>\n        <button>        \n            Register\n        </button>\n        <button class=\"btn-cancel\" routerLink=\"/login\">Cancel</button>\n    </div>\n</form>"
+        },
+        {
+            "name": "ToggleComponent",
+            "id": "component-ToggleComponent-b2af855571309a1a7c32f51b6571749d",
+            "file": "src/app/shared/toggle/toggle.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-toggle",
+            "styleUrls": [
+                "./toggle.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./toggle.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "formControl",
+                    "line": 11,
+                    "type": "FormControl"
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 13
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit, Input } from '@angular/core';\r\nimport { FormControl } from '@angular/forms';\r\n\r\n@Component({\r\n    selector: 'app-toggle',\r\n    templateUrl: './toggle.component.html',\r\n    styleUrls: ['./toggle.component.scss']\r\n})\r\nexport class ToggleComponent implements OnInit {\r\n\r\n    @Input() formControl: FormControl;\r\n\r\n    ngOnInit() {\r\n    }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".switch {\r\n    position: relative;\r\n    display: inline-block;\r\n    width: 60px;\r\n    height: 34px;\r\n  }\r\n  \r\n  .switch input { \r\n    opacity: 0;\r\n    width: 0;\r\n    height: 0;\r\n  }\r\n  \r\n  .slider {\r\n    position: absolute;\r\n    cursor: pointer;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    background-color: #ccc;\r\n    -webkit-transition: .4s;\r\n    transition: .4s;\r\n  }\r\n  \r\n  .slider:before {\r\n    position: absolute;\r\n    content: \"\";\r\n    height: 26px;\r\n    width: 26px;\r\n    left: 4px;\r\n    bottom: 4px;\r\n    background-color: white;\r\n    -webkit-transition: .4s;\r\n    transition: .4s;\r\n  }\r\n  \r\n  input:checked + .slider {\r\n    background-color: #2196F3;\r\n  }\r\n  \r\n  input:focus + .slider {\r\n    box-shadow: 0 0 1px #2196F3;\r\n  }\r\n  \r\n  input:checked + .slider:before {\r\n    -webkit-transform: translateX(26px);\r\n    -ms-transform: translateX(26px);\r\n    transform: translateX(26px);\r\n  }\r\n  \r\n  /* Rounded sliders */\r\n  .slider.round {\r\n    border-radius: 34px;\r\n  }\r\n  \r\n  .slider.round:before {\r\n    border-radius: 50%;\r\n  }",
+                    "styleUrl": "./toggle.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<label class=\"switch\">\r\n    <input type=\"checkbox\" [formControl]=\"formControl\">\r\n    <span class=\"slider round\"></span>\r\n  </label>"
         }
     ],
     "modules": [
@@ -2738,6 +2891,9 @@
                             "name": "AppComponent"
                         },
                         {
+                            "name": "FooterComponent"
+                        },
+                        {
                             "name": "HomeComponent"
                         },
                         {
@@ -2751,6 +2907,9 @@
                         },
                         {
                             "name": "RegisterComponent"
+                        },
+                        {
+                            "name": "ToggleComponent"
                         }
                     ]
                 },
@@ -3785,12 +3944,30 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/shared/footer/footer.componet.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FooterComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/shared/header/header.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "HeaderComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/toggle/toggle.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ToggleComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
