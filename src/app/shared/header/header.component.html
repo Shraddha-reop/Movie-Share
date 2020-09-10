@@ -3,7 +3,8 @@
         <h1>Movie Share</h1>
     </div>
     <nav *ngIf="isLoggedIn ; else logout" class="app-header__nav">
-        <button (click)="logout()">Logout</button>
+        <!-- <a routerLink="/">Logout</a> -->
+        <button (click) = "logt()">Logout</button>
     </nav>
     <ng-template #logout>
         <nav class="app-header__nav">
@@ -12,5 +13,4 @@
             </a>
         </nav>
        </ng-template>
-    <nav></nav>
 </header>

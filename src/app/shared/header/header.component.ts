@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import classnames from 'classnames';
 import { AccountService } from 'src/app/services';
 
@@ -15,9 +15,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // logout() {
-  //   this.accountService.logout();
-  // }
+  logout() {
+    this.accountService.logout();
+  }
+
+  logt() {
+   this.accountService.logout();
+  }
 }
 
 
