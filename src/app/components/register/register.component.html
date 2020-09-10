@@ -1,1 +1,37 @@
-<p>register works!</p>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h1>Register</h1>
+    <h1 class="err">{{error}}</h1>
+    <div class="container">
+        <label for="firstName">First Name</label>
+        <input type="text" formControlName="firstName" />
+        <div *ngIf="submitted && f.firstName.errors">
+            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+        </div>
+        <label for="lastName">Last Name</label>
+        <input type="text" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+        <div *ngIf="submitted && f.lastName.errors">
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+        </div>
+    
+    
+        <label for="username">Username</label>
+        <input type="text" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <div *ngIf="submitted && f.username.errors">
+            <div *ngIf="f.username.errors.required">Username is required</div>
+        </div>
+
+    
+        <label for="password">Password</label>
+        <input type="password" formControlName="password"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+        <button>        
+            Register
+        </button>
+        <button class="btn-cancel" routerLink="/login">Cancel</button>
+    </div>
+</form>

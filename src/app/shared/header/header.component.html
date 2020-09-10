@@ -1,1 +1,16 @@
-<p>header works!</p>
+<header class="app-header__container">
+    <div class="app-header__content">
+        <h1>Movie Share</h1>
+    </div>
+    <nav *ngIf="isLoggedIn ; else logout" class="app-header__nav">
+        <button (click)="logout()">Logout</button>
+    </nav>
+    <ng-template #logout>
+        <nav class="app-header__nav">
+            <a alt= "Login" routerLink="/login">Login</a>
+            <a alt="Register"  routerLink="/register">Register
+            </a>
+        </nav>
+       </ng-template>
+    <nav></nav>
+</header>

@@ -8,6 +8,14 @@ import { InteriorPageComponent } from './components/interior-page/interior-page.
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginUserComponent } from './components/login-user/login-user.component';
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from './store/app.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './store/app.effects';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from '../app/shared/header/header.component';
+import { JwtInterceptorInterceptor, ErrorInterceptorInterceptor, fakeBackendProvider } from './helpers';
 
 @NgModule({
   declarations: [
@@ -16,13 +24,24 @@ import { LoginUserComponent } from './components/login-user/login-user.component
     InteriorPageComponent,
     LoginComponent,
     RegisterComponent,
-    LoginUserComponent
+    LoginUserComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({
+      appModel: appReducer,
+    }),
+    EffectsModule.forRoot([AppEffects]),
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorInterceptor, multi: true },
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

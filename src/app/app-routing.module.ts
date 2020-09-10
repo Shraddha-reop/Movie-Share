@@ -5,12 +5,23 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginUserComponent } from './components/login-user/login-user.component';
-
+import { AuthGuard } from './guards/auth.guard';
+export const defaultRoute = '/home';
 const routes: Routes = [
   {
     path: '',
     component: InteriorPageComponent,
     children: [
+      {
+        path: '',
+        redirectTo: defaultRoute,
+        pathMatch: 'full'
+    },
+    {
+        path: 'home',
+        redirectTo: defaultRoute,
+        pathMatch: 'full'
+    },
       {
         path: 'login',
         component: LoginComponent
@@ -25,7 +36,8 @@ const routes: Routes = [
       },
       {
         path: 'login-user',
-        component: LoginUserComponent
+        component: LoginUserComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }

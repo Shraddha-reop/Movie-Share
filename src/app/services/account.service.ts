@@ -41,7 +41,7 @@ export class AccountService {
     logout() {
         localStorage.removeItem('user');
         this.userSubject.next(null);
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
         this.store.dispatch(new IsLoggedIn(false));
     }
 
