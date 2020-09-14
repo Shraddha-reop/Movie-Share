@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,10 @@ import { HeaderComponent } from '../app/shared/header/header.component';
 import { JwtInterceptorInterceptor, ErrorInterceptorInterceptor, fakeBackendProvider } from './helpers';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ToggleComponent } from './shared/toggle/toggle.component';
+import { CardComponent } from './shared/card/card.component';
+import { ButtonComponent } from './shared/button/button.component';
+import { HelloElement } from './hello-element';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +33,9 @@ import { ToggleComponent } from './shared/toggle/toggle.component';
     LoginUserComponent,
     HeaderComponent,
     ToggleComponent,
-    FooterComponent
+    FooterComponent,
+    CardComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +53,7 @@ import { ToggleComponent } from './shared/toggle/toggle.component';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorInterceptor, multi: true },
     fakeBackendProvider
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]
 })
 export class AppModule { }

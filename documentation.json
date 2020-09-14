@@ -936,6 +936,40 @@
             ]
         },
         {
+            "name": "HelloElement",
+            "id": "class-HelloElement-491a4163da0bac746982528b16e1fdc6",
+            "file": "src/app/hello-element.ts",
+            "type": "class",
+            "sourceCode": "import {LitElement, html, customElement, property} from 'lit-element';\r\n\r\nconsole.log('hello-world module');\r\n\r\n@customElement('hello-world')\r\nexport class HelloElement extends LitElement {\r\n\r\n  @property() name;\r\n\r\n  render() {\r\n    return html`<div>Hello ${this.name}</div>`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "name",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "decorators": [
+                        {
+                            "name": "property",
+                            "stringifiedArguments": ""
+                        }
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "render",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 10
+                }
+            ],
+            "indexSignatures": [],
+            "extends": "LitElement"
+        },
+        {
             "name": "IsError",
             "id": "class-IsError-093a7dcc0e521d9bb0c6bc011f49bf00",
             "file": "src/app/store/app.actions.ts",
@@ -1688,7 +1722,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-85eeca5b590999101ecb606bd5c8d40f",
+            "id": "component-AppComponent-c34586b5762044bd44e44ea7c6a3dac6",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1708,6 +1742,14 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "name",
+                    "defaultValue": "'Angular and LitElement'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
                     "name": "title",
                     "defaultValue": "'movieShare'",
                     "type": "string",
@@ -1722,7 +1764,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'movieShare';\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'movieShare';\n  name = 'Angular and LitElement';\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1731,99 +1773,18 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<main>\r\n    <router-outlet></router-outlet>\r\n</main>\r\n"
+            "templateData": "<main>\r\n    <hello-world name=\"{{ name }}\"></hello-world>\r\n    <router-outlet></router-outlet>\r\n</main>\r\n"
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-642c6c4e474cd5a0ac760dfda26b2fc9",
-            "file": "src/stories/button.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "storybook-button",
-            "styleUrls": [
-                "./button.css"
-            ],
-            "styles": [],
-            "template": "<button   type=\"button\"\n   (click)=\"onClick.emit($event)\"\n   [ngClass]=\"classes\"\n   [ngStyle]=\"{ 'background-color': backgroundColor }\"\n >\n   {{ label }}\n </button>",
-            "templateUrl": [],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "backgroundColor",
-                    "description": "<p>What background color to use</p>\n",
-                    "line": 26,
-                    "type": "string"
-                },
-                {
-                    "name": "label",
-                    "defaultValue": "'Button'",
-                    "description": "<p>Button contents</p>\n",
-                    "line": 40
-                },
-                {
-                    "name": "primary",
-                    "defaultValue": "false",
-                    "description": "<p>Is this the principal call to action on the page?</p>\n",
-                    "line": 20
-                },
-                {
-                    "name": "size",
-                    "defaultValue": "'medium'",
-                    "description": "<p>How large should the button be?</p>\n",
-                    "line": 32,
-                    "type": "\"small\" | \"medium\" | \"large\""
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "onClick",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "description": "<p>Optional click handler</p>\n",
-                    "line": 46,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  template: ` <button\n    type=\"button\"\n    (click)=\"onClick.emit($event)\"\n    [ngClass]=\"classes\"\n    [ngStyle]=\"{ 'background-color': backgroundColor }\"\n  >\n    {{ label }}\n  </button>`,\n  styleUrls: ['./button.css'],\n})\nexport default class ButtonComponent {\n  /**\n   * Is this the principal call to action on the page?\n   */\n  @Input()\n  primary = false;\n\n  /**\n   * What background color to use\n   */\n  @Input()\n  backgroundColor?: string;\n\n  /**\n   * How large should the button be?\n   */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /**\n   * Optional click handler\n   */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".storybook-button {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  border: 0;\n  border-radius: 3em;\n  cursor: pointer;\n  display: inline-block;\n  line-height: 1;\n}\n.storybook-button--primary {\n  color: white;\n  background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n  color: #333;\n  background-color: transparent;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n  font-size: 12px;\n  padding: 10px 16px;\n}\n.storybook-button--medium {\n  font-size: 14px;\n  padding: 11px 20px;\n}\n.storybook-button--large {\n  font-size: 16px;\n  padding: 12px 24px;\n}\n",
-                    "styleUrl": "./button.css"
-                }
-            ],
-            "stylesData": "",
-            "accessors": {
-                "classes": {
-                    "name": "classes",
-                    "getSignature": {
-                        "name": "classes",
-                        "type": "[]",
-                        "returnType": "string[]",
-                        "line": 48
-                    }
-                }
-            }
-        },
-        {
-            "name": "ButtonComponent",
-            "id": "component-ButtonComponent-28bf689e7e1027d6e9fddae576d78235-1",
+            "id": "component-ButtonComponent-9397df868bae3eb90500973e23b2f57f",
             "file": "src/app/shared/button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "app-button",
+            "selector": "sa-button",
             "styleUrls": [
                 "./button.component.scss"
             ],
@@ -1857,7 +1818,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-button',\n  templateUrl: './button.component.html',\n  styleUrls: ['./button.component.scss']\n})\nexport class ButtonComponent implements OnInit {\n\n  constructor() { }\n  @Input() buttonConfig: any = null;\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit, Input } from '@angular/core';\n\n@Component({\n  selector: 'sa-button',\n  templateUrl: './button.component.html',\n  styleUrls: ['./button.component.scss']\n})\nexport class ButtonComponent implements OnInit {\n\n  constructor() { }\n  @Input() buttonConfig: any = null;\n  ngOnInit(): void {\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1875,15 +1836,178 @@
             "implements": [
                 "OnInit"
             ],
-            "isDuplicate": true,
-            "duplicateId": 1,
-            "duplicateName": "ButtonComponent-1",
-            "templateData": "<ng-container *ngIf=\"buttonConfig?.text then text else image\">\n</ng-container>\n<ng-template #text>\n <button type=\"button\" class=\"text-btn\">\n {{ buttonConfig?.text}}\n </button>\n</ng-template>\n<ng-template #image>\n    <button class=\"img-btn\"><img alt=\"image button\" [src]=\"buttonConfig?.src\"></button>\n</ng-template>"
+            "templateData": "<ng-container *ngIf=\"buttonConfig?.text then text else image\">\n</ng-container>\n<ng-template #text>\n    <button type=\"button\" class=\"text-btn\">\n        {{ buttonConfig?.text}}\n    </button>\n</ng-template>\n<ng-template #image>\n    <button class=\"img-btn\"><img alt=\"image button\" [src]=\"buttonConfig?.src\"></button>\n</ng-template>"
+        },
+        {
+            "name": "CardComponent",
+            "id": "component-CardComponent-577e1e711badeb2a602e483d4cf0aac7",
+            "file": "src/app/shared/card/card.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-card",
+            "styleUrls": [
+                "./card.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./card.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "category",
+                    "line": 15,
+                    "type": "any"
+                },
+                {
+                    "name": "desc",
+                    "line": 14,
+                    "type": "any"
+                },
+                {
+                    "name": "id",
+                    "line": 17,
+                    "type": "any"
+                },
+                {
+                    "name": "isLoggedIn",
+                    "line": 18,
+                    "type": "boolean"
+                },
+                {
+                    "name": "title",
+                    "line": 13,
+                    "type": "any"
+                },
+                {
+                    "name": "year",
+                    "line": 16,
+                    "type": "any"
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "add",
+                    "defaultValue": "new EventEmitter<any>()",
+                    "line": 25,
+                    "type": "EventEmitter<any>"
+                },
+                {
+                    "name": "change",
+                    "defaultValue": "new EventEmitter<any>()",
+                    "line": 19,
+                    "type": "EventEmitter<any>"
+                },
+                {
+                    "name": "delete",
+                    "defaultValue": "new EventEmitter<any>()",
+                    "line": 22,
+                    "type": "EventEmitter<any>"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "selectIsLoggedIn$",
+                    "defaultValue": "this.store.select(selectIsLoggedIn)",
+                    "type": "Observable<boolean>",
+                    "optional": false,
+                    "description": "",
+                    "line": 27,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "store",
+                    "type": "Store<AppState>",
+                    "optional": false,
+                    "description": "",
+                    "line": 28,
+                    "modifierKind": [
+                        114
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 30
+                },
+                {
+                    "name": "OnAdd",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 42
+                },
+                {
+                    "name": "remove",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 38
+                },
+                {
+                    "name": "update",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 34
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';\r\nimport { Observable } from 'rxjs';\r\nimport { selectIsLoggedIn } from 'src/app/store/app.selector';\r\nimport { Store } from '@ngrx/store';\r\nimport { AppState } from 'src/app/app.model';\r\n\r\n@Component({\r\n    selector: 'app-card',\r\n    templateUrl: './card.component.html',\r\n    styleUrls: ['./card.component.scss']\r\n})\r\nexport class CardComponent implements OnInit {\r\n    @Input() title: any;\r\n    @Input() desc: any;\r\n    @Input() category: any;\r\n    @Input() year: any;\r\n    @Input() id: any;\r\n    @Input() isLoggedIn: boolean;\r\n    @Output() change: EventEmitter<any> = new EventEmitter<any>();\r\n\r\n    @Output()\r\n    delete: EventEmitter<any> = new EventEmitter<any>();\r\n\r\n    @Output()\r\n    add: EventEmitter<any> = new EventEmitter<any>();\r\n\r\n    public selectIsLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);\r\n    constructor(  public store: Store<AppState>) { }\r\n\r\n    ngOnInit() {\r\n        console.log(this.isLoggedIn, 'islogin');\r\n        \r\n    }\r\n    update() {\r\n        this.change.emit(this.id);\r\n    }\r\n\r\n    remove() {\r\n        this.delete.emit(this.id);\r\n    }\r\n\r\n    OnAdd(){\r\n        this.add.emit();\r\n    }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n    background-color: var(--primary-color);\r\n    color: var(--text-color);\r\n  }\r\n  \r\n  .card {\r\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\r\n    transition: 0.3s;\r\n    width: 100%;\r\n    margin-top: 1rem;\r\n  }\r\n  \r\n  .card:hover {\r\n    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);\r\n  }\r\n  \r\n  .container {\r\n    padding: 2px 16px;\r\n    display: grid;\r\n    grid-template-columns: auto auto auto auto;\r\n    img {\r\n      margin-top: 1.5rem;\r\n      @media screen and (min-width: 320px) and (max-width: 375px) {\r\n        width: 30px;\r\n        height: 30px;\r\n      }\r\n    }\r\n    .btn-remove {\r\n      margin-top: 3.5rem;\r\n      cursor: pointer;\r\n    }\r\n    .btn-update {\r\n      margin-top: 3.5rem;\r\n      cursor: pointer;\r\n    }\r\n    .data {\r\n      text-align: start;\r\n      width: 450px;\r\n      h2 {\r\n        @media screen and (min-width: 320px) and (max-width: 375px) {\r\n          font-size: 16px;\r\n        }\r\n      }\r\n      @media screen and (min-width: 320px) and (max-width: 375px) {\r\n        width: 105px;\r\n        h2 {\r\n          font-size: 16px;\r\n        }\r\n        p {\r\n          font-size: 12px;\r\n        }\r\n      }\r\n      @media screen and (min-width: 375px) and (max-width: 425px) {\r\n        width: 105px;\r\n        h2 {\r\n          font-size: 16px;\r\n        }\r\n        p {\r\n          font-size: 12px;\r\n        }\r\n      }\r\n      @media screen and (min-width: 425px) and (max-width: 768px) {\r\n        width: 150px;\r\n        h2 {\r\n          font-size: 16px;\r\n        }\r\n        p {\r\n          font-size: 12px;\r\n        }\r\n      }\r\n  \r\n      @media screen and (min-width: 768px) and (max-width: 1024px) {\r\n        width: 243px;\r\n        h2 {\r\n          font-size: 16px;\r\n        }\r\n        p {\r\n          font-size: 12px;\r\n        }\r\n      }\r\n      h2 {\r\n        word-wrap: break-word;\r\n      }\r\n      p {\r\n        word-wrap: break-word;\r\n      }\r\n    }\r\n  }\r\n  ",
+                    "styleUrl": "./card.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "store",
+                        "type": "Store<AppState>"
+                    }
+                ],
+                "line": 27,
+                "jsdoctags": [
+                    {
+                        "name": "store",
+                        "type": "Store<AppState>",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"card\">\r\n    <div class=\"container\">\r\n        <img src=\"../../../assets/svg/popcorn.svg\">\r\n        <div class=\"data\">\r\n            <h2><b>{{title}}</b></h2>\r\n            <p>{{desc}}</p>\r\n            <p>Category: <span> &nbsp;<b>{{category}}</b></span></p>\r\n            <p>Year:<span>&nbsp;<b>{{year}}</b></span></p>\r\n        </div>\r\n        <sa-button class=\"btn-update\" *ngIf=\"isLoggedIn\" [buttonConfig]=\"{src: '../../../assets/svg/update.svg'}\" (click) = \"update()\"></sa-button>\r\n        <sa-button class=\"btn-remove\" *ngIf=\"isLoggedIn\" [buttonConfig]=\"{src: '../../../assets/svg/delete.svg'}\" (click) = \"remove()\"></sa-button>\r\n        <a *ngIf=\"isLoggedIn\" (click)=\"OnAdd()\">Add</a>\r\n    </div>\r\n</div>"
         },
         {
             "name": "FooterComponent",
             "id": "component-FooterComponent-553595e88a91aa9276029346f56c2e6b",
-            "file": "src/app/shared/footer/footer.componet.ts",
+            "file": "src/app/shared/footer/footer.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -1931,7 +2055,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "\r\n.app-footer {\r\n  display: flex;\r\n  flex-direction: row-reverse;\r\n  padding: 4rem 4rem 5rem;\r\n\r\n  &__copyright {\r\n    display: block;\r\n    padding: 2rem;\r\n    text-align: right;\r\n    width: 44rem;\r\n\r\n    &-logo {\r\n      width: 40%;\r\n    }\r\n\r\n    &-text {\r\n      font-size: 1.75rem;\r\n      color: color(blue, 800);\r\n      line-height: 1.0;\r\n    }\r\n  }\r\n}\r\n",
+                    "data": ".app-footer {\r\n  display: flex;\r\n  flex-direction: row-reverse;\r\n  background-color: #33c2cc;\r\n\r\n  &__copyright {\r\n    display: block;\r\n    // padding: 2rem;\r\n    text-align: right;\r\n    width: 44rem;\r\n\r\n    &-logo {\r\n      width: 40%;\r\n    }\r\n\r\n    &-text {\r\n      font-size: 1.75rem;\r\n      color: var(--text-color);\r\n      line-height: 1;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./footer.component.scss"
                 }
             ],
@@ -1939,73 +2063,11 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"app-footer\">\r\n    <div class=\"app-footer__copyright\">\r\n      <img class=\"app-footer__copyright-logo\" src=\"../../../assets/img/movieSharelogo.PNG\" alt=\"Movie Share logo\">\r\n      <p class=app-footer__copyright-text>&copy;Sapience Analytics 2010-{{year}}</p>\r\n    </div>\r\n  </div>"
+            "templateData": "<div class=\"app-footer\">\r\n    <div class=\"app-footer__copyright\">\r\n      <img class=\"app-footer__copyright-logo\" src=\"../../../assets/img/movieSharelogo.PNG\" alt=\"Movie Share logo\">\r\n      <p class=app-footer__copyright-text>&copy;Movie Share 2010-{{year}}</p>\r\n    </div>\r\n  </div>"
         },
         {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-246e2a69dc126a3bd76c6328dd3b93e2",
-            "file": "src/stories/header.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "storybook-header",
-            "styleUrls": [
-                "./header.css"
-            ],
-            "styles": [],
-            "template": "<header>    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>",
-            "templateUrl": [],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "user",
-                    "defaultValue": "null",
-                    "line": 53,
-                    "type": "unknown"
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "onCreateAccount",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 62,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "onLogin",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 56,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "onLogout",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 59,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-header',\n  template: `<header>\n    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport default class HeaderComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".wrapper {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\nsvg {\n  display: inline-block;\n  vertical-align: top;\n}\n\nh1 {\n  font-weight: 900;\n  font-size: 20px;\n  line-height: 1;\n  margin: 6px 0 6px 10px;\n  display: inline-block;\n  vertical-align: top;\n}\n\nbutton + button {\n  margin-left: 10px;\n}\n",
-                    "styleUrl": "./header.css"
-                }
-            ],
-            "stylesData": ""
-        },
-        {
-            "name": "HeaderComponent",
-            "id": "component-HeaderComponent-4b6f45f0e18bfbd42884f8ce2ed4b610-1",
+            "id": "component-HeaderComponent-49fad8cc6a883f0acfd550b67780c5ed",
             "file": "src/app/shared/header/header.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2040,20 +2102,12 @@
             ],
             "methodsClass": [
                 {
-                    "name": "logout",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 31
-                },
-                {
                     "name": "logt",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 35
+                    "line": 31
                 },
                 {
                     "name": "ngOnInit",
@@ -2069,11 +2123,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit, Input } from '@angular/core';\nimport classnames from 'classnames';\nimport { AccountService } from 'src/app/services';\nimport { FormControl } from '@angular/forms';\nimport { ThemeService } from 'src/app/services/theme.service';\n\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.scss']\n})\nexport class HeaderComponent implements OnInit {\n\n  @Input() isLoggedIn;\n\n  darkTheme = new FormControl(false);\n  constructor(private accountService: AccountService, private themeService: ThemeService) {\n\n    this.darkTheme.valueChanges.subscribe(value => {\n      if (value) {\n        this.themeService.toggleDark();\n      } else {\n        this.themeService.toggleLight();\n      }\n    });\n\n  }\n  ngOnInit(): void {\n  }\n\n  logout() {\n    this.accountService.logout();\n  }\n\n  logt() {\n    this.accountService.logout();\n  }\n}\n\n\n\n",
+            "sourceCode": "import { Component, OnInit, Input } from '@angular/core';\nimport classnames from 'classnames';\nimport { AccountService } from 'src/app/services';\nimport { FormControl } from '@angular/forms';\nimport { ThemeService } from 'src/app/services/theme.service';\n\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.scss']\n})\nexport class HeaderComponent implements OnInit {\n\n  @Input() isLoggedIn;\n\n  darkTheme = new FormControl(false);\n  constructor(private accountService: AccountService, private themeService: ThemeService) {\n\n    this.darkTheme.valueChanges.subscribe(value => {\n      if (value) {\n        this.themeService.toggleDark();\n      } else {\n        this.themeService.toggleLight();\n      }\n    });\n\n  }\n  ngOnInit(): void {\n  }\n  \n  logt() {\n    this.accountService.logout();\n  }\n}\n\n\n\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "$cls: \".app-header\";\r\n\r\n:host {\r\n  background-color: var(--primary-color);\r\n  color: var(--text-color);\r\n}\r\n\r\n:host(#{$cls}) {\r\n  display: block;\r\n}\r\n\r\n#{$cls} {\r\n  &__container {\r\n    align-items: center;\r\n    display: flex;\r\n    width: 100%;\r\n    background-color: #267483;\r\n    h1 {\r\n      color: var(--text-color);\r\n      padding: 0 4rem;\r\n    }\r\n    img {\r\n      height: 9rem;\r\n      width: 17rem;\r\n    }\r\n  }\r\n  &__content {\r\n    align-items: center;\r\n    display: flex;\r\n    flex: 0 0 auto;\r\n    max-height: 19rem;\r\n    @media screen and (min-width: 320px) and (max-width: 480px) {\r\n      width: 84px;\r\n      h1 {\r\n        padding: 0;\r\n      }\r\n      &_app-logo {\r\n        height: 9rem;\r\n        width: 17rem;\r\n      }\r\n    }\r\n  }\r\n\r\n  &__nav {\r\n    align-items: center;\r\n    display: flex;\r\n    flex: 1 1 auto;\r\n    justify-content: flex-end;\r\n    min-height: 7rem;\r\n    background-color: #33c2cc;\r\n    a {\r\n      font-family: \"Nunito Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n      font-weight: 700;\r\n      border: 0;\r\n      border-radius: 3em;\r\n      cursor: pointer;\r\n      display: inline-block;\r\n      line-height: 1;\r\n      font-size: 16px;\r\n      padding: 12px 24px;\r\n      background-color: #267483;\r\n      text-decoration: none;\r\n      color: var(--text-color);\r\n      margin-left: 1rem;\r\n    }\r\n    button {\r\n      font-family: \"Nunito Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n      font-weight: 700;\r\n      border: 0;\r\n      border-radius: 3em;\r\n      cursor: pointer;\r\n      display: inline-block;\r\n      line-height: 1;\r\n      font-size: 16px;\r\n      padding: 12px 24px;\r\n      background-color: #267483;\r\n      text-decoration: none;\r\n      color: var(--text-color);\r\n      margin-left: 1rem;\r\n    }\r\n  }\r\n}\r\n",
+                    "data": "$cls: \".app-header\";\r\n\r\n:host {\r\n  background-color: var(--primary-color);\r\n  color: var(--text-color);\r\n}\r\n\r\n:host(#{$cls}) {\r\n  display: block;\r\n}\r\n\r\n#{$cls} {\r\n  &__container {\r\n    align-items: center;\r\n    display: flex;\r\n    width: 100%;\r\n    background-color: #06224d;\r\n    h1 {\r\n      color: var(--text-color);\r\n      padding: 0 4rem;\r\n    }\r\n    img {\r\n      height: 9rem;\r\n      width: 17rem;\r\n    }\r\n  }\r\n  &__content {\r\n    align-items: center;\r\n    display: flex;\r\n    flex: 0 0 auto;\r\n    max-height: 19rem;\r\n    @media screen and (min-width: 320px) and (max-width: 480px) {\r\n      width: 84px;\r\n      h1 {\r\n        padding: 0;\r\n      }\r\n      &_app-logo {\r\n        height: 9rem;\r\n        width: 17rem;\r\n      }\r\n    }\r\n  }\r\n\r\n  &__nav {\r\n    align-items: center;\r\n    display: flex;\r\n    flex: 1 1 auto;\r\n    justify-content: flex-end;\r\n    min-height: 7rem;\r\n    background-color: #33c2cc;\r\n    a {\r\n      font-family: \"Nunito Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n      font-weight: 700;\r\n      border: 0;\r\n      border-radius: 3em;\r\n      cursor: pointer;\r\n      display: inline-block;\r\n      line-height: 1;\r\n      font-size: 16px;\r\n      padding: 12px 24px;\r\n      background-color: #267483;\r\n      text-decoration: none;\r\n      color: var(--text-color);\r\n      margin-left: 1rem;\r\n    }\r\n    button {\r\n      font-family: \"Nunito Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n      font-weight: 700;\r\n      border: 0;\r\n      border-radius: 3em;\r\n      cursor: pointer;\r\n      display: inline-block;\r\n      line-height: 1;\r\n      font-size: 16px;\r\n      padding: 12px 24px;\r\n      background-color: #267483;\r\n      text-decoration: none;\r\n      color: var(--text-color);\r\n      margin-left: 1rem;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./header.component.scss"
                 }
             ],
@@ -2112,14 +2166,11 @@
             "implements": [
                 "OnInit"
             ],
-            "isDuplicate": true,
-            "duplicateId": 1,
-            "duplicateName": "HeaderComponent-1",
-            "templateData": "<header class=\"app-header__container\">\n    <div class=\"app-header__content\">\n        <!-- <h1>Movie Share</h1> -->\n        <img  src=\"../../../assets/img/movieSharelogo.PNG\" alt=\"Movie Share logo\">\n    </div>\n    <nav *ngIf=\"isLoggedIn ; else logout\" class=\"app-header__nav\">\n        <button (click)=\"logt()\">Logout</button>\n        <app-toggle id=\"darkTheme\" [formControl]=\"darkTheme\"></app-toggle>\n        \n        <!-- <app-button  [buttonConfig]=\"{text: 'Logout'}\" (click)=\"logt()\"></app-button>\n        <app-button  [buttonConfig]=\"{text: 'Logout'}\" ></app-button> -->\n    </nav>\n    <ng-template #logout>\n        <nav class=\"app-header__nav\">\n            <a alt=\"Login\" routerLink=\"/login\">Login</a>\n            <a alt=\"Register\" routerLink=\"/register\">Register\n            </a>\n            <app-toggle id=\"darkTheme\" [formControl]=\"darkTheme\"></app-toggle>\n            <app-button [buttonConfig]=\"{text: 'Logout'}\"></app-button>\n\n        </nav>\n    </ng-template>\n</header>"
+            "templateData": "<header class=\"app-header__container\">\n    <div class=\"app-header__content\">\n        <img src=\"../../../assets/img/movieSharelogo.PNG\" alt=\"Movie Share logo\">\n\n    </div>\n    <nav *ngIf=\"isLoggedIn ; else logout\" class=\"app-header__nav\">\n        <button (click)=\"logt()\">Logout</button>\n        <app-toggle tabindex=\"0\" id=\"darkTheme\" [formControl]=\"darkTheme\"></app-toggle>\n    </nav>\n    <ng-template #logout>\n        <nav class=\"app-header__nav\">\n            <sa-button></sa-button>\n            <a alt=\"Login\" routerLink=\"/login\">Login</a>\n            <a alt=\"Register\" routerLink=\"/register\">Register\n            </a>\n            <app-toggle tabindex=\"0\" id=\"darkTheme\" [formControl]=\"darkTheme\" ngDefaultControl></app-toggle>\n        </nav>\n    </ng-template>\n</header>"
         },
         {
             "name": "HomeComponent",
-            "id": "component-HomeComponent-a56f8a1a5d303e8b4ca1057d6c9253ef",
+            "id": "component-HomeComponent-e24f874aef01ea1aaf417b7cb0974cf7",
             "file": "src/app/components/home/home.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2139,13 +2190,16 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "accountService",
-                    "type": "AccountService",
+                    "name": "chviewChild",
+                    "type": "ButtonComponent",
                     "optional": false,
                     "description": "",
-                    "line": 22,
-                    "modifierKind": [
-                        114
+                    "line": 31,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "ButtonComponent"
+                        }
                     ]
                 },
                 {
@@ -2154,7 +2208,18 @@
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
-                    "line": 17,
+                    "line": 20,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "selectIsLoggedIn$",
+                    "defaultValue": "this.store.select(selectIsLoggedIn)",
+                    "type": "Observable<boolean>",
+                    "optional": false,
+                    "description": "",
+                    "line": 19,
                     "modifierKind": [
                         114
                     ]
@@ -2164,7 +2229,7 @@
                     "type": "Store<AppState>",
                     "optional": false,
                     "description": "",
-                    "line": 21,
+                    "line": 26,
                     "modifierKind": [
                         114
                     ]
@@ -2174,7 +2239,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 18,
                     "modifierKind": [
                         114
                     ]
@@ -2182,12 +2247,20 @@
             ],
             "methodsClass": [
                 {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 39
+                },
+                {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 24
+                    "line": 33
                 },
                 {
                     "name": "timerGame",
@@ -2195,7 +2268,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 27
+                    "line": 43
                 }
             ],
             "hostBindings": [],
@@ -2203,11 +2276,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Observable } from 'rxjs';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { AppState } from 'src/app/app.model';\nimport { selectData } from 'src/app/store/app.selector';\nimport { AccountService } from 'src/app/services';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  styleUrls: ['./home.component.scss']\n})\nexport class HomeComponent implements OnInit {\n\n  public time;\n  public selectData$: Observable<any> = this.store.select(selectData);\n\n  constructor(\n    private router: Router,\n    public store: Store<AppState>,\n    public accountService: AccountService) { }\n\n  ngOnInit(): void {\n  }\n\n  timerGame() {\n    console.log('Ready....go!');\n    setTimeout(() => {\n   this.time = \"Shraddha\";\n    }, 1000);\n  }\n\n\n}\n",
+            "sourceCode": "import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';\nimport { Observable } from 'rxjs';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { AppState } from 'src/app/app.model';\nimport { selectData, selectIsLoggedIn } from 'src/app/store/app.selector';\nimport { AccountService } from 'src/app/services';\nimport { ButtonComponent } from 'src/app/shared/button/button.component';\nimport { IsLoggedIn, FetchUserData } from 'src/app/store/app.actions';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  styleUrls: ['./home.component.scss']\n})\nexport class HomeComponent implements OnInit, AfterViewInit {\n\n  public time;\n  public selectIsLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);\n  public selectData$: Observable<any> = this.store.select(selectData);\n\n\n  constructor(\n    private accountService: AccountService,\n    private router: Router,\n    public store: Store<AppState>) {\n    this.store.dispatch(new IsLoggedIn(false));\n    this.store.dispatch(new FetchUserData());\n  }\n\n  @ViewChild(ButtonComponent) chviewChild: ButtonComponent;\n\n  ngOnInit(): void {\n    this.selectData$.subscribe(data => {\n      console.log(data);\n    })\n  }\n\n  ngAfterViewInit() {\n    console.log(this.chviewChild);\n  }\n\n  timerGame() {\n    console.log('Ready....go!');\n    setTimeout(() => {\n      this.time = 'Shraddha';\n    }, 1000);\n  }\n\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": ".item3 {\r\n    grid-area: main;\r\n    display: grid;\r\n    grid-template-columns: auto auto;\r\n    @media screen and (min-width: 320px) and (max-width: 480px) {\r\n        font-size: 14px;\r\n        grid-template-columns: auto;\r\n    }\r\n}\r\n",
                     "styleUrl": "./home.component.scss"
                 }
             ],
@@ -2217,20 +2290,27 @@
                 "description": "",
                 "args": [
                     {
+                        "name": "accountService",
+                        "type": "AccountService"
+                    },
+                    {
                         "name": "router",
                         "type": "Router"
                     },
                     {
                         "name": "store",
                         "type": "Store<AppState>"
-                    },
-                    {
-                        "name": "accountService",
-                        "type": "AccountService"
                     }
                 ],
-                "line": 17,
+                "line": 20,
                 "jsdoctags": [
+                    {
+                        "name": "accountService",
+                        "type": "AccountService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
                     {
                         "name": "router",
                         "type": "Router",
@@ -2244,20 +2324,14 @@
                         "tagName": {
                             "text": "param"
                         }
-                    },
-                    {
-                        "name": "accountService",
-                        "type": "AccountService",
-                        "tagName": {
-                            "text": "param"
-                        }
                     }
                 ]
             },
             "implements": [
-                "OnInit"
+                "OnInit",
+                "AfterViewInit"
             ],
-            "templateData": "<p>home works!</p>\n"
+            "templateData": "<section class=\"item3\">\n    <div *ngFor=\"let data of (selectData$ | async)\">\n      <app-card title=\"{{data.title}}\" desc=\"{{data.description}}\" category=\"{{data.category}}\" year=\"{{data.year}}\">\n      </app-card>\n    </div>\n  </section>"
         },
         {
             "name": "InteriorPageComponent",
@@ -2548,7 +2622,7 @@
         },
         {
             "name": "LoginUserComponent",
-            "id": "component-LoginUserComponent-c88ed3486f7717eca9721969c36229ea",
+            "id": "component-LoginUserComponent-0b7a3469fb3e224cb22b2eb4727edeb5",
             "file": "src/app/components/login-user/login-user.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2566,15 +2640,210 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "add",
+                    "defaultValue": "false",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                },
+                {
+                    "name": "darkTheme",
+                    "defaultValue": "new FormControl(false)",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "form",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "id",
+                    "defaultValue": "null",
+                    "type": "null",
+                    "optional": false,
+                    "description": "",
+                    "line": 25,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "isUpdate",
+                    "defaultValue": "false",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 24
+                },
+                {
+                    "name": "isUserLoggedIn",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "selectData$",
+                    "defaultValue": "this.store.select(selectData)",
+                    "type": "Observable<any>",
+                    "optional": false,
+                    "description": "",
+                    "line": 27,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "selectIsLoggedIn$",
+                    "defaultValue": "this.store.select(selectIsLoggedIn)",
+                    "type": "Observable<boolean>",
+                    "optional": false,
+                    "description": "",
+                    "line": 26,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "store",
+                    "type": "Store<AppState>",
+                    "optional": false,
+                    "description": "",
+                    "line": 30,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "submitted",
+                    "defaultValue": "false",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                },
+                {
+                    "name": "updateForm",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                }
+            ],
             "methodsClass": [
+                {
+                    "name": "logout",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 57
+                },
                 {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 12
+                    "line": 42
+                },
+                {
+                    "name": "onCancel",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 76
+                },
+                {
+                    "name": "OnClick",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 60,
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onDelete",
+                    "args": [
+                        {
+                            "name": "id",
+                            "type": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 71,
+                    "jsdoctags": [
+                        {
+                            "name": "id",
+                            "type": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onSubmit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 102
+                },
+                {
+                    "name": "onUpdate",
+                    "args": [
+                        {
+                            "name": "id",
+                            "type": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 65,
+                    "jsdoctags": [
+                        {
+                            "name": "id",
+                            "type": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onUpdateLink",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 81
                 }
             ],
             "hostBindings": [],
@@ -2582,11 +2851,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-login-user',\n  templateUrl: './login-user.component.html',\n  styleUrls: ['./login-user.component.scss']\n})\nexport class LoginUserComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';\nimport { Observable } from 'rxjs';\nimport { selectIsLoggedIn, selectData } from 'src/app/store/app.selector';\nimport { AccountService } from 'src/app/services';\nimport { Store } from '@ngrx/store';\nimport { AppState } from 'src/app/app.model';\nimport * as uuid from 'uuid';\nimport { FetchUserData, IsLoggedIn, DeleteLink, UpdateLink, SaveSharedLinks } from 'src/app/store/app.actions';\n\n@Component({\n  selector: 'app-login-user',\n  templateUrl: './login-user.component.html',\n  styleUrls: ['./login-user.component.scss']\n})\nexport class LoginUserComponent implements OnInit {\n\n  form: FormGroup;\n  updateForm: FormGroup;\n  isUserLoggedIn: boolean;\n  add = false;\n  darkTheme = new FormControl(false);\n  submitted = false;\n  isUpdate = false;\n  public id = null;\n  public selectIsLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);\n  public selectData$: Observable<any> = this.store.select(selectData);\n  constructor(\n    private accountService: AccountService,\n    public store: Store<AppState>,\n    private formBuilder: FormBuilder) {\n    this.store.dispatch(new FetchUserData());\n    this.store.dispatch(new IsLoggedIn(true));\n    this.selectIsLoggedIn$.subscribe(val => {\n      console.log(val);\n      this.isUserLoggedIn = val;\n      console.log(this.isUserLoggedIn);\n    });\n\n  }\n\n  ngOnInit(): void {\n    this.form = this.formBuilder.group({\n      title: ['', Validators.required],\n      desc: ['', Validators.required],\n      category: ['', Validators.required],\n      releaseDate: ['', Validators.required]\n    });\n\n    this.updateForm = this.formBuilder.group({\n      updateTitle: ['', Validators.required],\n      updateDesc: ['', Validators.required],\n      updateCategory: ['', Validators.required],\n      updateYear: ['', Validators.required]\n    });\n  }\n  logout() {\n    this.accountService.logout();\n  }\n  OnClick(event) {\n    this.add = true;\n    this.isUpdate = false;\n  }\n\n  onUpdate(id) {\n    this.id = id;\n    this.isUpdate = true;\n    this.add = false;\n    window.scrollTo(0, 0);\n  }\n  onDelete(id) {\n    this.store.dispatch(new DeleteLink(id));\n    this.store.dispatch(new FetchUserData());\n  }\n\n  onCancel() {\n    this.add = false;\n    this.isUpdate = false;\n  }\n\n  onUpdateLink() {\n    this.submitted = true;\n    if (this.updateForm.invalid) {\n      return;\n    }\n    const requestBody = {\n      id: this.id,\n      title: this.updateForm.value.updateTitle,\n      description: this.updateForm.value.updateDesc,\n      year: this.updateForm.value.updateYear,\n      category: this.updateForm.value.updateCategory\n    };\n    this.store.dispatch(new UpdateLink(this.id, requestBody));\n    this.store.dispatch(new FetchUserData());\n    this.isUpdate = false;\n  }\n\n  get f() { return this.form.controls; }\n\n  get fc() { return this.updateForm.controls; }\n\n  onSubmit() {\n    this.submitted = true;\n    this.id = null;\n    if (this.form.invalid) {\n      return;\n    }\n    this.add = false;\n    const myId = uuid.v4();\n    const requestBody = {\n      id: myId,\n      title: this.form.value.title,\n      description: this.form.value.desc,\n      category: this.form.value.category,\n      year: this.form.value.releaseDate\n    };\n    this.store.dispatch(new SaveSharedLinks(requestBody));\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": ":host {\r\n    background-color: var(--primary-color);\r\n    color: var(--text-color);\r\n  }\r\n  .item1 {\r\n    grid-area: header;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    background-color: #1abc9c;\r\n    height: 80px;\r\n    .head-line {\r\n      display: flex;\r\n      justify-content: space-between;\r\n      width: 17rem;\r\n      h1 {\r\n        @media screen and (min-width: 320px) and (max-width: 480px) {\r\n          font-size: 14px;\r\n          margin-top: 1.5rem;\r\n        }\r\n      }\r\n      img {\r\n        margin-top: .5rem;\r\n        margin-right: 5rem;\r\n      }\r\n    }\r\n    .btns {\r\n      display: flex;\r\n      flex-flow: row;\r\n      margin: 1rem;\r\n      .btn-logout {\r\n        margin: 1rem 1rem;\r\n        cursor: pointer;\r\n      }\r\n      .btn-add {\r\n        margin: 0.2rem 1rem;\r\n        cursor: pointer;\r\n      }\r\n    }\r\n  }\r\n  \r\n  body {\r\n    font-family: Arial, Helvetica, sans-serif;\r\n  }\r\n  form {\r\n    border: 3px solid #f1f1f1;\r\n  }\r\n  .item2 {\r\n    input[type=\"text\"],\r\n    input[type=\"password\"] {\r\n      width: 100%;\r\n      padding: 12px 20px;\r\n      margin: 8px 0;\r\n      display: inline-block;\r\n      border: 1px solid #ccc;\r\n      box-sizing: border-box;\r\n    }\r\n  \r\n    button {\r\n      background-color: #1abc9c;\r\n      color: white;\r\n      padding: 14px 20px;\r\n      margin: 8px 0;\r\n      border: none;\r\n      cursor: pointer;\r\n      width: 100%;\r\n    }\r\n  \r\n    .btn-cancel {\r\n      background-color: lightsalmon;\r\n      color: white;\r\n      padding: 14px 20px;\r\n      margin: 8px 0;\r\n      border: none;\r\n      cursor: pointer;\r\n      width: 100%;\r\n    }\r\n  \r\n    .btn-reg:hover {\r\n      opacity: 0.8;\r\n    }\r\n  \r\n    button:hover {\r\n      opacity: 0.8;\r\n    }\r\n  \r\n    .cancelbtn {\r\n      width: auto;\r\n      padding: 10px 18px;\r\n      background-color: #f44336;\r\n    }\r\n  \r\n    .imgcontainer {\r\n      text-align: center;\r\n      margin: 24px 0 12px 0;\r\n    }\r\n  \r\n    img.avatar {\r\n      width: 40%;\r\n      border-radius: 50%;\r\n    }\r\n  \r\n    .container {\r\n      padding: 16px;\r\n    }\r\n  \r\n    span.psw {\r\n      float: right;\r\n      padding-top: 16px;\r\n    }\r\n  }\r\n  .item3 {\r\n    grid-area: main;\r\n    display: grid;\r\n    width: 100%;\r\n    column-width: 19em;\r\n    -webkit-column-width: 19em;\r\n    column-gap: 1em;\r\n    -webkit-column-gap: 1em;\r\n  }\r\n  .item4 {\r\n    grid-area: right;\r\n  }\r\n  .item5 {\r\n    grid-area: footer;\r\n  }\r\n  \r\n  .grid-container {\r\n    display: grid;\r\n    grid-template-areas:\r\n      \"header header header header header header\"\r\n      \"menu menu menu menu menu menu\"\r\n      \"main main main main main main\"\r\n      \"footer footer footer footer footer footer\";\r\n    grid-gap: 10px;\r\n    //   background-color: #2196F3;\r\n    padding: 10px;\r\n  }\r\n  \r\n  .grid-container > div {\r\n    //   background-color: rgba(255, 255, 255, 0.8);\r\n    text-align: center;\r\n    padding: 20px 0;\r\n    font-size: 30px;\r\n  }\r\n  ",
                     "styleUrl": "./login-user.component.scss"
                 }
             ],
@@ -2594,75 +2863,69 @@
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
-                "args": [],
-                "line": 8
+                "args": [
+                    {
+                        "name": "accountService",
+                        "type": "AccountService"
+                    },
+                    {
+                        "name": "store",
+                        "type": "Store<AppState>"
+                    },
+                    {
+                        "name": "formBuilder",
+                        "type": "FormBuilder"
+                    }
+                ],
+                "line": 27,
+                "jsdoctags": [
+                    {
+                        "name": "accountService",
+                        "type": "AccountService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "store",
+                        "type": "Store<AppState>",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "formBuilder",
+                        "type": "FormBuilder",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<p>login-user works!</p>\n"
-        },
-        {
-            "name": "PageComponent",
-            "id": "component-PageComponent-cca1a8911321fa17756ce90c90de65cc",
-            "file": "src/stories/page.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "storybook-page",
-            "styleUrls": [
-                "./page.css"
-            ],
-            "styles": [],
-            "template": "<article>    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"onLogout.emit($event)\"\n      (onLogin)=\"onLogin.emit($event)\"\n      (onCreateAccount)=\"onCreateAccount.emit($event)\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://www.learnstorybook.com\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Learn Storybook\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\">\n          docs\n        </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>",
-            "templateUrl": [],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "user",
-                    "defaultValue": "null",
-                    "line": 66,
-                    "type": "unknown"
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "onCreateAccount",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 75,
-                    "type": "EventEmitter"
+            "accessors": {
+                "f": {
+                    "name": "f",
+                    "getSignature": {
+                        "name": "f",
+                        "type": "",
+                        "returnType": "",
+                        "line": 98
+                    }
                 },
-                {
-                    "name": "onLogin",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 69,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "onLogout",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 72,
-                    "type": "EventEmitter"
+                "fc": {
+                    "name": "fc",
+                    "getSignature": {
+                        "name": "fc",
+                        "type": "",
+                        "returnType": "",
+                        "line": 100
+                    }
                 }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-page',\n  template: `<article>\n    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"onLogout.emit($event)\"\n      (onLogin)=\"onLogin.emit($event)\"\n      (onCreateAccount)=\"onCreateAccount.emit($event)\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://www.learnstorybook.com\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Learn Storybook\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\">\n          docs\n        </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>`,\n  styleUrls: ['./page.css'],\n})\nexport default class PageComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n\n// export const Page = ({ user, onLogin, onLogout, onCreateAccount }) => (\n//   <article>\n//     <Header user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />\n\n// );\n// Page.propTypes = {\n//   user: PropTypes.shape({}),\n//   onLogin: PropTypes.func.isRequired,\n//   onLogout: PropTypes.func.isRequired,\n//   onCreateAccount: PropTypes.func.isRequired,\n// };\n\n// Page.defaultProps = {\n//   user: null,\n// };\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "section {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 24px;\n  padding: 48px 20px;\n  margin: 0 auto;\n  max-width: 600px;\n  color: #333;\n}\n\nh2 {\n  font-weight: 900;\n  font-size: 32px;\n  line-height: 1;\n  margin: 0 0 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n\np {\n  margin: 1em 0;\n}\n\na {\n  text-decoration: none;\n  color: #1ea7fd;\n}\n\nul {\n  padding-left: 30px;\n  margin: 1em 0;\n}\n\nli {\n  margin-bottom: 8px;\n}\n\n.tip {\n  display: inline-block;\n  border-radius: 1em;\n  font-size: 11px;\n  line-height: 12px;\n  font-weight: 700;\n  background: #e7fdd8;\n  color: #66bf3c;\n  padding: 4px 12px;\n  margin-right: 10px;\n  vertical-align: top;\n}\n\n.tip-wrapper {\n  font-size: 13px;\n  line-height: 20px;\n  margin-top: 40px;\n  margin-bottom: 40px;\n}\n\n.tip-wrapper svg {\n  display: inline-block;\n  height: 12px;\n  width: 12px;\n  margin-right: 4px;\n  vertical-align: top;\n  margin-top: 3px;\n}\n\n.tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
-                    "styleUrl": "./page.css"
-                }
-            ],
-            "stylesData": ""
+            },
+            "templateData": "<div>\n    <div *ngIf=\"add\" class=\"item2\">\n        <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n            <div class=\"container\">\n                <label>Title</label>\n                <input type=\"text\" formControlName=\"title\" />\n                <div *ngIf=\"submitted && f.title.errors\">\n                    <div *ngIf=\"f.title.errors.required\">Title is required</div>\n                </div>\n                <label>Description</label>\n                <input type=\"text\" formControlName=\"desc\" />\n                <div *ngIf=\"submitted && f.desc.errors\">\n                    <div *ngIf=\"f.desc.errors.required\">Description is required</div>\n                </div>\n                <label>Category</label>\n                <input type=\"text\" formControlName=\"category\" />\n                <div *ngIf=\"submitted && f.category.errors\">\n                    <div *ngIf=\"f.category.errors.required\">Category is required</div>\n                </div>\n                <label>Release Date</label>&nbsp;&nbsp;\n                <input type=\"date\" formControlName=\"releaseDate\" />\n                <div *ngIf=\"submitted && f.releaseDate.errors\">\n                    <div *ngIf=\"f.releaseDate.errors.required\">Release Date is required</div>\n                </div>\n                <button>\n                    Add\n                </button>\n                <button class=\"btn-cancel\" (click) = \"onCancel()\">Cancel</button>\n            </div>\n               \n        </form>\n    </div>\n    <div *ngIf=\"isUpdate\" class=\"item2\">\n        <form [formGroup]=\"updateForm\" (ngSubmit)=\"onUpdateLink()\" >\n            <div class=\"container\">\n                <label>Title</label>\n                <input type=\"text\" formControlName=\"updateTitle\" />\n                <div *ngIf=\"submitted && fc.updateTitle.errors\">\n                    <div *ngIf=\"fc.updateTitle.errors.required\">Title is required</div>\n                </div>\n                <label>Description</label>\n                <input type=\"text\" formControlName=\"updateDesc\" />\n                <div *ngIf=\"submitted && fc.updateDesc.errors\">\n                    <div *ngIf=\"fc.updateDesc.errors.required\">Description is required</div>\n                </div>\n                <label>Category</label>\n                <input type=\"text\" formControlName=\"updateCategory\" />\n                <div *ngIf=\"submitted && fc.updateCategory.errors\">\n                    <div *ngIf=\"fc.updateCategory.errors.required\">Category is required</div>\n                </div>\n                <label>Release Date</label>&nbsp;&nbsp;\n                <input type=\"date\" formControlName=\"updateYear\" />\n                <div *ngIf=\"submitted && fc.updateYear.errors\">\n                    <div *ngIf=\"fc.updateYear.errors.required\">Release Date is required</div>\n                </div>\n                <button>\n                    Update\n                </button>\n                <button class=\"btn-cancel\" (click) = \"onCancel()\">Cancel</button>\n            </div>\n        </form>\n    </div>\n    <section>\n        <div *ngFor=\"let data of (selectData$ | async)\">\n            <div>\n                <div>\n                    <app-card title=\"{{data.title}}\" desc=\"{{data.description}}\" category=\"{{data.category}}\"\n                        year=\"{{data.year}}\" isLoggedIn = \"isUserLoggedIn\" id = \"{{data.id}}\" (change) = \"onUpdate($event)\" (delete) = \"onDelete($event)\" (add) = \"OnClick($event)\">\n                    </app-card>\n                </div>\n            </div>\n        </div>\n    </section>\n</div>"
         },
         {
             "name": "RegisterComponent",
@@ -2814,7 +3077,7 @@
         },
         {
             "name": "ToggleComponent",
-            "id": "component-ToggleComponent-b2af855571309a1a7c32f51b6571749d",
+            "id": "component-ToggleComponent-9387e66d27ec0ef43629d081e7628b1e",
             "file": "src/app/shared/toggle/toggle.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2833,6 +3096,7 @@
             "inputsClass": [
                 {
                     "name": "formControl",
+                    "defaultValue": "new FormControl(false)",
                     "line": 11,
                     "type": "FormControl"
                 }
@@ -2854,11 +3118,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit, Input } from '@angular/core';\r\nimport { FormControl } from '@angular/forms';\r\n\r\n@Component({\r\n    selector: 'app-toggle',\r\n    templateUrl: './toggle.component.html',\r\n    styleUrls: ['./toggle.component.scss']\r\n})\r\nexport class ToggleComponent implements OnInit {\r\n\r\n    @Input() formControl: FormControl;\r\n\r\n    ngOnInit() {\r\n    }\r\n}\r\n",
+            "sourceCode": "import { Component, OnInit, Input } from '@angular/core';\r\nimport { FormControl } from '@angular/forms';\r\n\r\n@Component({\r\n    selector: 'app-toggle',\r\n    templateUrl: './toggle.component.html',\r\n    styleUrls: ['./toggle.component.scss']\r\n})\r\nexport class ToggleComponent implements OnInit {\r\n\r\n    @Input() formControl = new FormControl(false);\r\n\r\n    ngOnInit() {\r\n    }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".switch {\r\n    position: relative;\r\n    display: inline-block;\r\n    width: 60px;\r\n    height: 34px;\r\n  }\r\n  \r\n  .switch input { \r\n    opacity: 0;\r\n    width: 0;\r\n    height: 0;\r\n  }\r\n  \r\n  .slider {\r\n    position: absolute;\r\n    cursor: pointer;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    background-color: #ccc;\r\n    -webkit-transition: .4s;\r\n    transition: .4s;\r\n  }\r\n  \r\n  .slider:before {\r\n    position: absolute;\r\n    content: \"\";\r\n    height: 26px;\r\n    width: 26px;\r\n    left: 4px;\r\n    bottom: 4px;\r\n    background-color: white;\r\n    -webkit-transition: .4s;\r\n    transition: .4s;\r\n  }\r\n  \r\n  input:checked + .slider {\r\n    background-color: #2196F3;\r\n  }\r\n  \r\n  input:focus + .slider {\r\n    box-shadow: 0 0 1px #2196F3;\r\n  }\r\n  \r\n  input:checked + .slider:before {\r\n    -webkit-transform: translateX(26px);\r\n    -ms-transform: translateX(26px);\r\n    transform: translateX(26px);\r\n  }\r\n  \r\n  /* Rounded sliders */\r\n  .slider.round {\r\n    border-radius: 34px;\r\n  }\r\n  \r\n  .slider.round:before {\r\n    border-radius: 50%;\r\n  }",
+                    "data": ".switch {\r\n    position: relative;\r\n    display: inline-block;\r\n    width: 60px;\r\n    height: 34px;\r\n  }\r\n  \r\n  .switch input { \r\n    opacity: 0;\r\n    width: 0;\r\n    height: 0;\r\n  }\r\n  \r\n  .slider {\r\n    position: absolute;\r\n    cursor: pointer;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    background-color: #06224d;\r\n    -webkit-transition: .4s;\r\n    transition: .4s;\r\n  }\r\n  \r\n  .slider:before {\r\n    position: absolute;\r\n    content: \"\";\r\n    height: 26px;\r\n    width: 26px;\r\n    left: 4px;\r\n    bottom: 4px;\r\n    background-color: white;\r\n    -webkit-transition: .4s;\r\n    transition: .4s;\r\n  }\r\n  \r\n  input:checked + .slider {\r\n    background-color: #2196F3;\r\n  }\r\n  \r\n  input:focus + .slider {\r\n    box-shadow: 0 0 1px #2196F3;\r\n  }\r\n  \r\n  input:checked + .slider:before {\r\n    -webkit-transform: translateX(26px);\r\n    -ms-transform: translateX(26px);\r\n    transform: translateX(26px);\r\n  }\r\n  \r\n  /* Rounded sliders */\r\n  .slider.round {\r\n    border-radius: 34px;\r\n  }\r\n  \r\n  .slider.round:before {\r\n    border-radius: 50%;\r\n  }",
                     "styleUrl": "./toggle.component.scss"
                 }
             ],
@@ -2866,7 +3130,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<label class=\"switch\">\r\n    <input type=\"checkbox\" [formControl]=\"formControl\">\r\n    <span class=\"slider round\"></span>\r\n  </label>"
+            "templateData": "<label class=\"switch\">\r\n    <input type=\"checkbox\" [formControl]=\"formControl\">\r\n    <span class=\"slider round\"></span>\r\n</label>"
         }
     ],
     "modules": [
@@ -2891,7 +3155,16 @@
                             "name": "AppComponent"
                         },
                         {
+                            "name": "ButtonComponent"
+                        },
+                        {
+                            "name": "CardComponent"
+                        },
+                        {
                             "name": "FooterComponent"
+                        },
+                        {
+                            "name": "HeaderComponent"
                         },
                         {
                             "name": "HomeComponent"
@@ -3012,14 +3285,6 @@
                 "defaultValue": "{\r\n    provide: HTTP_INTERCEPTORS,\r\n    useClass: FakeBackendInterceptorInterceptor,\r\n    multi: true\r\n}"
             },
             {
-                "name": "Large",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
                 "name": "lightTheme",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -3028,60 +3293,12 @@
                 "defaultValue": "{\r\n  'primary-color': '#fff',\r\n  'background-color': '#fff',\r\n  'text-color': '#2d2d2d'\r\n}"
             },
             {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
                 "name": "mock",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/jestGlobalMocks.ts",
                 "type": "",
                 "defaultValue": "() => {\r\n    let storage = {};\r\n    return {\r\n        getItem: key => key in storage ? storage[key] : null,\r\n        setItem: (key, value) => storage[key] = value || '',\r\n        removeItem: key => delete storage[key],\r\n        clear: () => storage = {},\r\n    };\r\n}"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Secondary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "selectApp",
@@ -3114,38 +3331,6 @@
                 "file": "src/app/store/app.selector.ts",
                 "type": "",
                 "defaultValue": "createSelector(\r\n    selectApp,\r\n    (state: AppModelState) => {\r\n        return state.isLoggedIn;\r\n    }\r\n)"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
-                "type": "Story<Button>",
-                "defaultValue": "(args: Button) => ({\n  component: Button,\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "type": "Story<Header>",
-                "defaultValue": "(args: Header) => ({\n  component: Header,\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "type": "Story<Page>",
-                "defaultValue": "(args: Page) => ({\n  component: Page,\n  props: args,\n})"
             },
             {
                 "ctype": "miscellaneous",
@@ -3377,100 +3562,6 @@
                     "file": "src/app/helpers/fake-backend-interceptor.interceptor.ts",
                     "type": "string",
                     "defaultValue": "'angular-10-registration-login-example-users'"
-                }
-            ],
-            "src/stories/Button.stories.ts": [
-                {
-                    "name": "Large",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Secondary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Small",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "type": "Story<Button>",
-                    "defaultValue": "(args: Button) => ({\n  component: Button,\n  props: args,\n})"
-                }
-            ],
-            "src/stories/Header.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "type": "Story<Header>",
-                    "defaultValue": "(args: Header) => ({\n  component: Header,\n  props: args,\n})"
-                }
-            ],
-            "src/stories/Page.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "type": "Story<Page>",
-                    "defaultValue": "(args: Page) => ({\n  component: Page,\n  props: args,\n})"
                 }
             ],
             "src/jestGlobalMocks.ts": [
@@ -3718,7 +3809,7 @@
         ]
     },
     "coverage": {
-        "count": 1,
+        "count": 0,
         "status": "low",
         "files": [
             {
@@ -3746,7 +3837,7 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
@@ -3764,7 +3855,7 @@
                 "linktype": "component",
                 "name": "HomeComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
@@ -3782,7 +3873,7 @@
                 "linktype": "component",
                 "name": "LoginUserComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/21",
                 "status": "low"
             },
             {
@@ -3808,6 +3899,15 @@
                 "type": "guard",
                 "linktype": "guard",
                 "name": "AuthGuard",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/hello-element.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "HelloElement",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
                 "status": "low"
@@ -3944,7 +4044,16 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/shared/footer/footer.componet.ts",
+                "filePath": "src/app/shared/card/card.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CardComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/17",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/footer/footer.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "FooterComponent",
@@ -3958,7 +4067,7 @@
                 "linktype": "component",
                 "name": "HeaderComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -4227,143 +4336,6 @@
                 "name": "mock",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Large",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Primary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Secondary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Small",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/button.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "ButtonComponent",
-                "coveragePercent": 83,
-                "coverageCount": "5/6",
-                "status": "very-good"
-            },
-            {
-                "filePath": "src/stories/header.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "HeaderComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/5",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/page.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "PageComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/5",
                 "status": "low"
             }
         ]

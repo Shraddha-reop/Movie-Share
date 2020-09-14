@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 })
 export class ToggleComponent implements OnInit {
 
-    @Input() formControl: FormControl;
+    @Input() formControl = new FormControl(false);
 
     ngOnInit() {
     }

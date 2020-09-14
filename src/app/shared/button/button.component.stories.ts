@@ -1,7 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
 
-storiesOf('button', module)
+storiesOf('Button', module)
     .addDecorator(
         moduleMetadata({
             declarations: [ButtonComponent],
@@ -12,7 +12,7 @@ storiesOf('button', module)
         'Text-Button',
         () => ({
             template: `
-                <app-button  [buttonConfig]="{text: 'Login'}" ></app-button>
+                <sa-button  [buttonConfig]="{text: 'Login'}" ></sa-button>
             `,
             props: {
                 buttonConfig: '{text: "Login"}'
@@ -23,7 +23,7 @@ storiesOf('button', module)
         'Image-Button-Update',
         () => ({
             template: `
-                <app-button  [buttonConfig]="{src: '../../../assets/svg/update.svg'}" ></app-button>
+                <sa-button  [buttonConfig]="{src: '../../../assets/svg/update.svg'}" ></sa-button>
             `,
             props: {
                 buttonConfig: '{src: "../../../assets/svg/update.svg"}'
@@ -34,7 +34,7 @@ storiesOf('button', module)
         'Image-Button-Delete',
         () => ({
             template: `
-                <app-button  [buttonConfig]="{src: '../../../assets/svg/delete.svg'}" ></app-button>
+                <sa-button  [buttonConfig]="{src: '../../../assets/svg/delete.svg'}" ></sa-button>
             `,
             props: {
                 buttonConfig: '{src: "../../../assets/svg/delete.svg"}'

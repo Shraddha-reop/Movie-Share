@@ -27,6 +27,8 @@
     "@ngrx/effects": "^10.0.0",
     "@ngrx/store": "^10.0.0",
     "@storybook/cli": "^6.0.21",
+    "json-server": "^0.16.1",
+    "lit-element": "^2.4.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

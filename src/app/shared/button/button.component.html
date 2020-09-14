@@ -1,9 +1,9 @@
 <ng-container *ngIf="buttonConfig?.text then text else image">
 </ng-container>
 <ng-template #text>
- <button type="button" class="text-btn">
- {{ buttonConfig?.text}}
- </button>
+    <button type="button" class="text-btn">
+        {{ buttonConfig?.text}}
+    </button>
 </ng-template>
 <ng-template #image>
     <button class="img-btn"><img alt="image button" [src]="buttonConfig?.src"></button>

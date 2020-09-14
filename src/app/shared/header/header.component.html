@@ -1,19 +1,17 @@
 <header class="app-header__container">
     <div class="app-header__content">
-        <img  src="../../../assets/img/movieSharelogo.PNG" alt="Movie Share logo">
+        <img src="../../../assets/img/movieSharelogo.PNG" alt="Movie Share logo">
     </div>
     <nav *ngIf="isLoggedIn ; else logout" class="app-header__nav">
         <button (click)="logt()">Logout</button>
-        <app-toggle id="darkTheme" [formControl]="darkTheme"></app-toggle>
+        <app-toggle tabindex="0" id="darkTheme" [formControl]="darkTheme"></app-toggle>
     </nav>
     <ng-template #logout>
         <nav class="app-header__nav">
             <a alt="Login" routerLink="/login">Login</a>
             <a alt="Register" routerLink="/register">Register
             </a>
-            <app-toggle id="darkTheme" [formControl]="darkTheme"></app-toggle>
-            <app-button [buttonConfig]="{text: 'Logout'}"></app-button>
-
+            <app-toggle tabindex="0" id="darkTheme" [formControl]="darkTheme" ngDefaultControl></app-toggle>
         </nav>
     </ng-template>
 </header>

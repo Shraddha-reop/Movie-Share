@@ -3,38 +3,49 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.model';
-import { selectData } from 'src/app/store/app.selector';
+import { selectData, selectIsLoggedIn } from 'src/app/store/app.selector';
 import { AccountService } from 'src/app/services';
 import { ButtonComponent } from 'src/app/shared/button/button.component';
+import { IsLoggedIn, FetchUserData } from 'src/app/store/app.actions';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit,AfterViewInit  {
+export class HomeComponent implements OnInit, AfterViewInit {
 
+
+  name = 'Angular and LitElement';
   public time;
+  public selectIsLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);
   public selectData$: Observable<any> = this.store.select(selectData);
 
+
   constructor(
+    private accountService: AccountService,
     private router: Router,
-    public store: Store<AppState>,
-    public accountService: AccountService) { }
-
-    @ViewChild(ButtonComponent) chviewChild: ButtonComponent;
-
-  ngOnInit(): void {
+    public store: Store<AppState>) {
+    this.store.dispatch(new IsLoggedIn(false));
+    this.store.dispatch(new FetchUserData());
   }
 
-  ngAfterViewInit(){
+  @ViewChild(ButtonComponent) chviewChild: ButtonComponent;
+
+  ngOnInit(): void {
+    this.selectData$.subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  ngAfterViewInit() {
     console.log(this.chviewChild);
   }
 
   timerGame() {
     console.log('Ready....go!');
     setTimeout(() => {
-   this.time = "Shraddha";
+      this.time = 'Shraddha';
     }, 1000);
   }
 
