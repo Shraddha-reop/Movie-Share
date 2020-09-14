@@ -33,21 +33,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild(ButtonComponent) chviewChild: ButtonComponent;
 
   ngOnInit(): void {
-    this.selectData$.subscribe(data => {
-      console.log(data);
-    })
   }
 
   ngAfterViewInit() {
-    console.log(this.chviewChild);
   }
-
-  timerGame() {
-    console.log('Ready....go!');
-    setTimeout(() => {
-      this.time = 'Shraddha';
-    }, 1000);
-  }
-
 
 }

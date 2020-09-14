@@ -24,3 +24,11 @@ export const selectError = createSelector(
         return state.error;
     }
 );
+
+
+export const selectModal = createSelector(
+    selectApp,
+    (state: AppModelState) => {
+        return state.showModal;
+    }
+);

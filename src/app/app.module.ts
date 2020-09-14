@@ -21,6 +21,7 @@ import { ToggleComponent } from './shared/toggle/toggle.component';
 import { CardComponent } from './shared/card/card.component';
 import { ButtonComponent } from './shared/button/button.component';
 import { HelloElement } from './hello-element';
+import { ModalComponent } from './shared/modal/modal.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { HelloElement } from './hello-element';
     ToggleComponent,
     FooterComponent,
     CardComponent,
-    ButtonComponent
+    ButtonComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

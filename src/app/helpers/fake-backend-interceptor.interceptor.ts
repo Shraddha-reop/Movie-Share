@@ -37,9 +37,7 @@ export class FakeBackendInterceptorInterceptor implements HttpInterceptor {
             });
         }
 
-        function register() {
-            console.log(body);
-            
+        function register() {   
             const user = body;
             if (users.find(x => x.username === user.username)) {
                 return error('Username "' + user.username + '" is already taken');

@@ -18,7 +18,8 @@ export enum AppActionType {
     IS_ERROR = 'Activity: IS_ERROR',
     USER_LOGIN = 'Activity: USER_LOGIN',
     USER_LOGIN_SUCCESS = 'Activity: USER_LOGIN_SUCCESS',
-    USER_LOGIN_ERROR = 'Activity: USER_LOGIN_ERROR'
+    USER_LOGIN_ERROR = 'Activity: USER_LOGIN_ERROR',
+    SHOW_MODAL = 'Activity: SHOW_MODAL'
 }
 
 export class FetchUserData implements Action {
@@ -106,6 +107,11 @@ export class UserLoginError implements Action {
     constructor(public err: any) { }
 }
 
+export class ShowModel implements Action {
+    readonly type = AppActionType.SHOW_MODAL;
+    constructor(public showModal: boolean) { }
+}
+
 export type AppAction =
     | FetchUserData
     | FetchUserDataSuccess
@@ -116,4 +122,5 @@ export type AppAction =
     | IsError
     | UserLogin
     | UserLoginSuccess
-    | UserLoginError;
+    | UserLoginError
+    | ShowModel;

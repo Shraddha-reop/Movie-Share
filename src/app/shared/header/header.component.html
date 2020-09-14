@@ -8,7 +8,7 @@
     </nav>
     <ng-template #logout>
         <nav class="app-header__nav">
-            <a alt="Login" routerLink="/login">Login</a>
+            <a alt="Login" routerLink="/login" (click) = "OnLogin()">Login</a>
             <a alt="Register" routerLink="/register">Register
             </a>
             <app-toggle tabindex="0" id="darkTheme" [formControl]="darkTheme" ngDefaultControl></app-toggle>

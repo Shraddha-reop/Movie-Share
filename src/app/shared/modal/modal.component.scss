@@ -1,0 +1,49 @@
+
+$cls: '.app-modal';
+#{$cls} {
+  &__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+  }
+  &__body {
+    background-color: white;
+    z-index: 99;
+    min-width: 50rem;
+    max-width: 128rem;
+    min-height: 30rem;
+    position: absolute;
+    padding: 3rem;
+    border-radius: 0.5rem;
+    // .modal-title {
+    //   @include fontSize(700);
+    // }
+    .close {
+      background: transparent;
+      top: 2rem;
+      right: 2rem;
+      position: absolute;
+      cursor: pointer;
+      color: color(greys, 600);
+    }
+  }
+  &__bg-overlay {
+    background: rgba(106, 115, 118, 0.4);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}

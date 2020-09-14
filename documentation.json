@@ -4,7 +4,7 @@
     "injectables": [
         {
             "name": "AccountService",
-            "id": "injectable-AccountService-2fa415506b86201fb559cd3d32408596",
+            "id": "injectable-AccountService-345efda15d7fbf40fe2e33dde92d26a0",
             "file": "src/app/services/account.service.ts",
             "properties": [
                 {
@@ -91,7 +91,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 49,
+                    "line": 48,
                     "jsdoctags": [
                         {
                             "name": "user",
@@ -104,7 +104,7 @@
                 }
             ],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { BehaviorSubject, Observable } from 'rxjs';\nimport { Router } from '@angular/router';\nimport { HttpClient } from '@angular/common/http';\nimport { map } from 'rxjs/operators';\nimport { User } from '../models/user';\nimport { environment } from '../../environments/environment';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../app.model';\nimport { IsLoggedIn } from '../store/app.actions';\n\n@Injectable({\n    providedIn: 'root'\n})\nexport class AccountService {\n    private userSubject: BehaviorSubject<User>;\n    public user: Observable<User>;\n\n    constructor(\n        private router: Router,\n        private http: HttpClient,\n        public store: Store<AppState>\n    ) {\n        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));\n        this.user = this.userSubject.asObservable();\n    }\n\n    public get userValue(): User {\n        return this.userSubject.value;\n    }\n\n    login(username, password) {\n        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })\n            .pipe(map(user => {\n                localStorage.setItem('user', JSON.stringify(user));\n                this.userSubject.next(user);\n                return user;\n            }));\n    }\n\n    logout() {\n        console.log(\"logout\");\n        localStorage.removeItem('user');\n        this.userSubject.next(null);\n        this.router.navigate(['/home']);\n        this.store.dispatch(new IsLoggedIn(false));\n    }\n\n    register(user) {\n        return this.http.post(`${environment.apiUrl}/users/register`, user);\n    }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { BehaviorSubject, Observable } from 'rxjs';\nimport { Router } from '@angular/router';\nimport { HttpClient } from '@angular/common/http';\nimport { map } from 'rxjs/operators';\nimport { User } from '../models/user';\nimport { environment } from '../../environments/environment';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../app.model';\nimport { IsLoggedIn } from '../store/app.actions';\n\n@Injectable({\n    providedIn: 'root'\n})\nexport class AccountService {\n    private userSubject: BehaviorSubject<User>;\n    public user: Observable<User>;\n\n    constructor(\n        private router: Router,\n        private http: HttpClient,\n        public store: Store<AppState>\n    ) {\n        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));\n        this.user = this.userSubject.asObservable();\n    }\n\n    public get userValue(): User {\n        return this.userSubject.value;\n    }\n\n    login(username, password) {\n        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })\n            .pipe(map(user => {\n                localStorage.setItem('user', JSON.stringify(user));\n                this.userSubject.next(user);\n                return user;\n            }));\n    }\n\n    logout() {\n        localStorage.removeItem('user');\n        this.userSubject.next(null);\n        this.router.navigate(['/home']);\n        this.store.dispatch(new IsLoggedIn(false));\n    }\n\n    register(user) {\n        return this.http.post(`${environment.apiUrl}/users/register`, user);\n    }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -937,17 +937,17 @@
         },
         {
             "name": "HelloElement",
-            "id": "class-HelloElement-491a4163da0bac746982528b16e1fdc6",
+            "id": "class-HelloElement-7b9335b50bbff580d1f57ec363ae13e8",
             "file": "src/app/hello-element.ts",
             "type": "class",
-            "sourceCode": "import {LitElement, html, customElement, property} from 'lit-element';\r\n\r\nconsole.log('hello-world module');\r\n\r\n@customElement('hello-world')\r\nexport class HelloElement extends LitElement {\r\n\r\n  @property() name;\r\n\r\n  render() {\r\n    return html`<div>Hello ${this.name}</div>`;\r\n  }\r\n}",
+            "sourceCode": "import {LitElement, html, customElement, property} from 'lit-element';\r\n\r\n@customElement('hello-world')\r\nexport class HelloElement extends LitElement {\r\n\r\n  @property() name;\r\n\r\n  render() {\r\n    return html`<div>Hello ${this.name}</div>`;\r\n  }\r\n}",
             "properties": [
                 {
                     "name": "name",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 8,
+                    "line": 6,
                     "decorators": [
                         {
                             "name": "property",
@@ -963,7 +963,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 10
+                    "line": 8
                 }
             ],
             "indexSignatures": [],
@@ -1773,7 +1773,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<main>\r\n    <hello-world name=\"{{ name }}\"></hello-world>\r\n    <router-outlet></router-outlet>\r\n</main>\r\n"
+            "templateData": "<main>\r\n    <router-outlet></router-outlet>\r\n</main>\r\n"
         },
         {
             "name": "ButtonComponent",
@@ -1840,7 +1840,7 @@
         },
         {
             "name": "CardComponent",
-            "id": "component-CardComponent-577e1e711badeb2a602e483d4cf0aac7",
+            "id": "component-CardComponent-de399817c3d23d5b8c764eb18ccd7ea9",
             "file": "src/app/shared/card/card.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1946,7 +1946,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 42
+                    "line": 40
                 },
                 {
                     "name": "remove",
@@ -1954,7 +1954,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 38
+                    "line": 36
                 },
                 {
                     "name": "update",
@@ -1962,7 +1962,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 34
+                    "line": 32
                 }
             ],
             "hostBindings": [],
@@ -1970,7 +1970,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';\r\nimport { Observable } from 'rxjs';\r\nimport { selectIsLoggedIn } from 'src/app/store/app.selector';\r\nimport { Store } from '@ngrx/store';\r\nimport { AppState } from 'src/app/app.model';\r\n\r\n@Component({\r\n    selector: 'app-card',\r\n    templateUrl: './card.component.html',\r\n    styleUrls: ['./card.component.scss']\r\n})\r\nexport class CardComponent implements OnInit {\r\n    @Input() title: any;\r\n    @Input() desc: any;\r\n    @Input() category: any;\r\n    @Input() year: any;\r\n    @Input() id: any;\r\n    @Input() isLoggedIn: boolean;\r\n    @Output() change: EventEmitter<any> = new EventEmitter<any>();\r\n\r\n    @Output()\r\n    delete: EventEmitter<any> = new EventEmitter<any>();\r\n\r\n    @Output()\r\n    add: EventEmitter<any> = new EventEmitter<any>();\r\n\r\n    public selectIsLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);\r\n    constructor(  public store: Store<AppState>) { }\r\n\r\n    ngOnInit() {\r\n        console.log(this.isLoggedIn, 'islogin');\r\n        \r\n    }\r\n    update() {\r\n        this.change.emit(this.id);\r\n    }\r\n\r\n    remove() {\r\n        this.delete.emit(this.id);\r\n    }\r\n\r\n    OnAdd(){\r\n        this.add.emit();\r\n    }\r\n}",
+            "sourceCode": "import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';\r\nimport { Observable } from 'rxjs';\r\nimport { selectIsLoggedIn } from 'src/app/store/app.selector';\r\nimport { Store } from '@ngrx/store';\r\nimport { AppState } from 'src/app/app.model';\r\n\r\n@Component({\r\n    selector: 'app-card',\r\n    templateUrl: './card.component.html',\r\n    styleUrls: ['./card.component.scss']\r\n})\r\nexport class CardComponent implements OnInit {\r\n    @Input() title: any;\r\n    @Input() desc: any;\r\n    @Input() category: any;\r\n    @Input() year: any;\r\n    @Input() id: any;\r\n    @Input() isLoggedIn: boolean;\r\n    @Output() change: EventEmitter<any> = new EventEmitter<any>();\r\n\r\n    @Output()\r\n    delete: EventEmitter<any> = new EventEmitter<any>();\r\n\r\n    @Output()\r\n    add: EventEmitter<any> = new EventEmitter<any>();\r\n\r\n    public selectIsLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);\r\n    constructor(  public store: Store<AppState>) { }\r\n\r\n    ngOnInit() {   \r\n    }\r\n    update() {\r\n        this.change.emit(this.id);\r\n    }\r\n\r\n    remove() {\r\n        this.delete.emit(this.id);\r\n    }\r\n\r\n    OnAdd(){\r\n        this.add.emit();\r\n    }\r\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2002,7 +2002,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"card\">\r\n    <div class=\"container\">\r\n        <img src=\"../../../assets/svg/popcorn.svg\">\r\n        <div class=\"data\">\r\n            <h2><b>{{title}}</b></h2>\r\n            <p>{{desc}}</p>\r\n            <p>Category: <span> &nbsp;<b>{{category}}</b></span></p>\r\n            <p>Year:<span>&nbsp;<b>{{year}}</b></span></p>\r\n        </div>\r\n        <sa-button class=\"btn-update\" *ngIf=\"isLoggedIn\" [buttonConfig]=\"{src: '../../../assets/svg/update.svg'}\" (click) = \"update()\"></sa-button>\r\n        <sa-button class=\"btn-remove\" *ngIf=\"isLoggedIn\" [buttonConfig]=\"{src: '../../../assets/svg/delete.svg'}\" (click) = \"remove()\"></sa-button>\r\n        <a *ngIf=\"isLoggedIn\" (click)=\"OnAdd()\">Add</a>\r\n    </div>\r\n</div>"
+            "templateData": "<div class=\"card\">\r\n    <div class=\"container\">\r\n        <img src=\"../../../assets/svg/popcorn.svg\">\r\n        <div class=\"data\">\r\n            <h2><b>{{title}}</b></h2>\r\n            <p>{{desc}}</p>\r\n            <p>Category: <span> &nbsp;<b>{{category}}</b></span></p>\r\n            <p>Year:<span>&nbsp;<b>{{year}}</b></span></p>\r\n        </div>\r\n        <sa-button class=\"btn-update\" *ngIf=\"isLoggedIn\" [buttonConfig]=\"{src: '../../../assets/svg/update.svg'}\" (click) = \"update()\"></sa-button>\r\n        <sa-button class=\"btn-remove\" *ngIf=\"isLoggedIn\" [buttonConfig]=\"{src: '../../../assets/svg/delete.svg'}\" (click) = \"remove()\"></sa-button>\r\n    </div>\r\n</div>"
         },
         {
             "name": "FooterComponent",
@@ -2127,7 +2127,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "$cls: \".app-header\";\r\n\r\n:host {\r\n  background-color: var(--primary-color);\r\n  color: var(--text-color);\r\n}\r\n\r\n:host(#{$cls}) {\r\n  display: block;\r\n}\r\n\r\n#{$cls} {\r\n  &__container {\r\n    align-items: center;\r\n    display: flex;\r\n    width: 100%;\r\n    background-color: #06224d;\r\n    h1 {\r\n      color: var(--text-color);\r\n      padding: 0 4rem;\r\n    }\r\n    img {\r\n      height: 9rem;\r\n      width: 17rem;\r\n    }\r\n  }\r\n  &__content {\r\n    align-items: center;\r\n    display: flex;\r\n    flex: 0 0 auto;\r\n    max-height: 19rem;\r\n    @media screen and (min-width: 320px) and (max-width: 480px) {\r\n      width: 84px;\r\n      h1 {\r\n        padding: 0;\r\n      }\r\n      &_app-logo {\r\n        height: 9rem;\r\n        width: 17rem;\r\n      }\r\n    }\r\n  }\r\n\r\n  &__nav {\r\n    align-items: center;\r\n    display: flex;\r\n    flex: 1 1 auto;\r\n    justify-content: flex-end;\r\n    min-height: 7rem;\r\n    background-color: #33c2cc;\r\n    a {\r\n      font-family: \"Nunito Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n      font-weight: 700;\r\n      border: 0;\r\n      border-radius: 3em;\r\n      cursor: pointer;\r\n      display: inline-block;\r\n      line-height: 1;\r\n      font-size: 16px;\r\n      padding: 12px 24px;\r\n      background-color: #267483;\r\n      text-decoration: none;\r\n      color: var(--text-color);\r\n      margin-left: 1rem;\r\n    }\r\n    button {\r\n      font-family: \"Nunito Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n      font-weight: 700;\r\n      border: 0;\r\n      border-radius: 3em;\r\n      cursor: pointer;\r\n      display: inline-block;\r\n      line-height: 1;\r\n      font-size: 16px;\r\n      padding: 12px 24px;\r\n      background-color: #267483;\r\n      text-decoration: none;\r\n      color: var(--text-color);\r\n      margin-left: 1rem;\r\n    }\r\n  }\r\n}\r\n",
+                    "data": "$cls: \".app-header\";\r\n\r\n:host {\r\n  background-color: var(--primary-color);\r\n  color: var(--text-color);\r\n}\r\n\r\n:host(#{$cls}) {\r\n  display: block;\r\n}\r\n\r\n#{$cls} {\r\n  &__container {\r\n    align-items: center;\r\n    display: flex;\r\n    width: 100%;\r\n    background-color: #06224d;\r\n    h1 {\r\n      color: var(--text-color);\r\n      padding: 0 4rem;\r\n    }\r\n    img {\r\n      height: 9rem;\r\n      width: 17rem;\r\n    }\r\n  }\r\n  &__content {\r\n    align-items: center;\r\n    display: flex;\r\n    flex: 0 0 auto;\r\n    max-height: 19rem;\r\n    @media screen and (min-width: 320px) and (max-width: 480px) {\r\n      width: 84px;\r\n      h1 {\r\n        padding: 0;\r\n      }\r\n      &_app-logo {\r\n        height: 9rem;\r\n        width: 17rem;\r\n      }\r\n    }\r\n  }\r\n\r\n  &__nav {\r\n    align-items: center;\r\n    display: flex;\r\n    flex: 1 1 auto;\r\n    justify-content: flex-end;\r\n    min-height: 7rem;\r\n    background-color: #33c2cc;\r\n    a {\r\n      font-family: \"Nunito Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n      font-weight: 700;\r\n      border: 0;\r\n      border-radius: 3em;\r\n      cursor: pointer;\r\n      display: inline-block;\r\n      line-height: 1;\r\n      font-size: 16px;\r\n      padding: 12px 24px;\r\n      background-color: #267483;\r\n      text-decoration: none;\r\n      color: var(--text-color);\r\n      margin: 0 1rem;\r\n    }\r\n    button {\r\n      font-family: \"Nunito Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\r\n      font-weight: 700;\r\n      border: 0;\r\n      border-radius: 3em;\r\n      cursor: pointer;\r\n      display: inline-block;\r\n      line-height: 1;\r\n      font-size: 16px;\r\n      padding: 12px 24px;\r\n      background-color: #267483;\r\n      text-decoration: none;\r\n      color: var(--text-color);\r\n      margin: 0 1rem;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./header.component.scss"
                 }
             ],
@@ -2166,11 +2166,11 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<header class=\"app-header__container\">\n    <div class=\"app-header__content\">\n        <img src=\"../../../assets/img/movieSharelogo.PNG\" alt=\"Movie Share logo\">\n\n    </div>\n    <nav *ngIf=\"isLoggedIn ; else logout\" class=\"app-header__nav\">\n        <button (click)=\"logt()\">Logout</button>\n        <app-toggle tabindex=\"0\" id=\"darkTheme\" [formControl]=\"darkTheme\"></app-toggle>\n    </nav>\n    <ng-template #logout>\n        <nav class=\"app-header__nav\">\n            <sa-button></sa-button>\n            <a alt=\"Login\" routerLink=\"/login\">Login</a>\n            <a alt=\"Register\" routerLink=\"/register\">Register\n            </a>\n            <app-toggle tabindex=\"0\" id=\"darkTheme\" [formControl]=\"darkTheme\" ngDefaultControl></app-toggle>\n        </nav>\n    </ng-template>\n</header>"
+            "templateData": "<header class=\"app-header__container\">\n    <div class=\"app-header__content\">\n        <img src=\"../../../assets/img/movieSharelogo.PNG\" alt=\"Movie Share logo\">\n    </div>\n    <nav *ngIf=\"isLoggedIn ; else logout\" class=\"app-header__nav\">\n        <button (click)=\"logt()\">Logout</button>\n        <app-toggle tabindex=\"0\" id=\"darkTheme\" [formControl]=\"darkTheme\"></app-toggle>\n    </nav>\n    <ng-template #logout>\n        <nav class=\"app-header__nav\">\n            <a alt=\"Login\" routerLink=\"/login\">Login</a>\n            <a alt=\"Register\" routerLink=\"/register\">Register\n            </a>\n            <app-toggle tabindex=\"0\" id=\"darkTheme\" [formControl]=\"darkTheme\" ngDefaultControl></app-toggle>\n        </nav>\n    </ng-template>\n</header>"
         },
         {
             "name": "HomeComponent",
-            "id": "component-HomeComponent-e24f874aef01ea1aaf417b7cb0974cf7",
+            "id": "component-HomeComponent-ea1a275f0c9f0031a52c99497fcd26d4",
             "file": "src/app/components/home/home.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2194,7 +2194,7 @@
                     "type": "ButtonComponent",
                     "optional": false,
                     "description": "",
-                    "line": 31,
+                    "line": 33,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -2203,12 +2203,20 @@
                     ]
                 },
                 {
+                    "name": "name",
+                    "defaultValue": "'Angular and LitElement'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                },
+                {
                     "name": "selectData$",
                     "defaultValue": "this.store.select(selectData)",
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
-                    "line": 20,
+                    "line": 22,
                     "modifierKind": [
                         114
                     ]
@@ -2219,7 +2227,7 @@
                     "type": "Observable<boolean>",
                     "optional": false,
                     "description": "",
-                    "line": 19,
+                    "line": 21,
                     "modifierKind": [
                         114
                     ]
@@ -2229,7 +2237,7 @@
                     "type": "Store<AppState>",
                     "optional": false,
                     "description": "",
-                    "line": 26,
+                    "line": 28,
                     "modifierKind": [
                         114
                     ]
@@ -2239,7 +2247,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 18,
+                    "line": 20,
                     "modifierKind": [
                         114
                     ]
@@ -2252,7 +2260,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 39
+                    "line": 38
                 },
                 {
                     "name": "ngOnInit",
@@ -2260,15 +2268,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 33
-                },
-                {
-                    "name": "timerGame",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 43
+                    "line": 35
                 }
             ],
             "hostBindings": [],
@@ -2276,7 +2276,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';\nimport { Observable } from 'rxjs';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { AppState } from 'src/app/app.model';\nimport { selectData, selectIsLoggedIn } from 'src/app/store/app.selector';\nimport { AccountService } from 'src/app/services';\nimport { ButtonComponent } from 'src/app/shared/button/button.component';\nimport { IsLoggedIn, FetchUserData } from 'src/app/store/app.actions';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  styleUrls: ['./home.component.scss']\n})\nexport class HomeComponent implements OnInit, AfterViewInit {\n\n  public time;\n  public selectIsLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);\n  public selectData$: Observable<any> = this.store.select(selectData);\n\n\n  constructor(\n    private accountService: AccountService,\n    private router: Router,\n    public store: Store<AppState>) {\n    this.store.dispatch(new IsLoggedIn(false));\n    this.store.dispatch(new FetchUserData());\n  }\n\n  @ViewChild(ButtonComponent) chviewChild: ButtonComponent;\n\n  ngOnInit(): void {\n    this.selectData$.subscribe(data => {\n      console.log(data);\n    })\n  }\n\n  ngAfterViewInit() {\n    console.log(this.chviewChild);\n  }\n\n  timerGame() {\n    console.log('Ready....go!');\n    setTimeout(() => {\n      this.time = 'Shraddha';\n    }, 1000);\n  }\n\n\n}\n",
+            "sourceCode": "import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';\nimport { Observable } from 'rxjs';\nimport { Router } from '@angular/router';\nimport { Store } from '@ngrx/store';\nimport { AppState } from 'src/app/app.model';\nimport { selectData, selectIsLoggedIn } from 'src/app/store/app.selector';\nimport { AccountService } from 'src/app/services';\nimport { ButtonComponent } from 'src/app/shared/button/button.component';\nimport { IsLoggedIn, FetchUserData } from 'src/app/store/app.actions';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  styleUrls: ['./home.component.scss']\n})\nexport class HomeComponent implements OnInit, AfterViewInit {\n\n\n  name = 'Angular and LitElement';\n  public time;\n  public selectIsLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);\n  public selectData$: Observable<any> = this.store.select(selectData);\n\n\n  constructor(\n    private accountService: AccountService,\n    private router: Router,\n    public store: Store<AppState>) {\n    this.store.dispatch(new IsLoggedIn(false));\n    this.store.dispatch(new FetchUserData());\n  }\n\n  @ViewChild(ButtonComponent) chviewChild: ButtonComponent;\n\n  ngOnInit(): void {\n  }\n\n  ngAfterViewInit() {\n  }\n\n  // timerGame() {\n  //   setTimeout(() => {\n  //     this.time = 'Shraddha';\n  //   }, 1000);\n  // }\n\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2302,7 +2302,7 @@
                         "type": "Store<AppState>"
                     }
                 ],
-                "line": 20,
+                "line": 22,
                 "jsdoctags": [
                     {
                         "name": "accountService",
@@ -2331,7 +2331,7 @@
                 "OnInit",
                 "AfterViewInit"
             ],
-            "templateData": "<section class=\"item3\">\n    <div *ngFor=\"let data of (selectData$ | async)\">\n      <app-card title=\"{{data.title}}\" desc=\"{{data.description}}\" category=\"{{data.category}}\" year=\"{{data.year}}\">\n      </app-card>\n    </div>\n  </section>"
+            "templateData": "<section class=\"item3\">\n  <!-- <hello-world name=\"{{ name }}\"></hello-world> -->\n    <div *ngFor=\"let data of (selectData$ | async)\">\n      <app-card title=\"{{data.title}}\" desc=\"{{data.description}}\" category=\"{{data.category}}\" year=\"{{data.year}}\">\n      </app-card>\n    </div>\n  </section>"
         },
         {
             "name": "InteriorPageComponent",
@@ -2622,7 +2622,7 @@
         },
         {
             "name": "LoginUserComponent",
-            "id": "component-LoginUserComponent-0b7a3469fb3e224cb22b2eb4727edeb5",
+            "id": "component-LoginUserComponent-1e538335b2a8a06408e56219ec1feb9c",
             "file": "src/app/components/login-user/login-user.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2745,7 +2745,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 57
+                    "line": 55
                 },
                 {
                     "name": "ngOnInit",
@@ -2753,7 +2753,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 42
+                    "line": 40
                 },
                 {
                     "name": "onCancel",
@@ -2761,29 +2761,15 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 76
+                    "line": 74
                 },
                 {
                     "name": "OnClick",
-                    "args": [
-                        {
-                            "name": "event",
-                            "type": ""
-                        }
-                    ],
+                    "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 60,
-                    "jsdoctags": [
-                        {
-                            "name": "event",
-                            "type": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
+                    "line": 58
                 },
                 {
                     "name": "onDelete",
@@ -2796,7 +2782,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 71,
+                    "line": 69,
                     "jsdoctags": [
                         {
                             "name": "id",
@@ -2813,7 +2799,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 102
+                    "line": 100
                 },
                 {
                     "name": "onUpdate",
@@ -2826,7 +2812,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 65,
+                    "line": 63,
                     "jsdoctags": [
                         {
                             "name": "id",
@@ -2843,7 +2829,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 81
+                    "line": 79
                 }
             ],
             "hostBindings": [],
@@ -2851,11 +2837,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';\nimport { Observable } from 'rxjs';\nimport { selectIsLoggedIn, selectData } from 'src/app/store/app.selector';\nimport { AccountService } from 'src/app/services';\nimport { Store } from '@ngrx/store';\nimport { AppState } from 'src/app/app.model';\nimport * as uuid from 'uuid';\nimport { FetchUserData, IsLoggedIn, DeleteLink, UpdateLink, SaveSharedLinks } from 'src/app/store/app.actions';\n\n@Component({\n  selector: 'app-login-user',\n  templateUrl: './login-user.component.html',\n  styleUrls: ['./login-user.component.scss']\n})\nexport class LoginUserComponent implements OnInit {\n\n  form: FormGroup;\n  updateForm: FormGroup;\n  isUserLoggedIn: boolean;\n  add = false;\n  darkTheme = new FormControl(false);\n  submitted = false;\n  isUpdate = false;\n  public id = null;\n  public selectIsLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);\n  public selectData$: Observable<any> = this.store.select(selectData);\n  constructor(\n    private accountService: AccountService,\n    public store: Store<AppState>,\n    private formBuilder: FormBuilder) {\n    this.store.dispatch(new FetchUserData());\n    this.store.dispatch(new IsLoggedIn(true));\n    this.selectIsLoggedIn$.subscribe(val => {\n      console.log(val);\n      this.isUserLoggedIn = val;\n      console.log(this.isUserLoggedIn);\n    });\n\n  }\n\n  ngOnInit(): void {\n    this.form = this.formBuilder.group({\n      title: ['', Validators.required],\n      desc: ['', Validators.required],\n      category: ['', Validators.required],\n      releaseDate: ['', Validators.required]\n    });\n\n    this.updateForm = this.formBuilder.group({\n      updateTitle: ['', Validators.required],\n      updateDesc: ['', Validators.required],\n      updateCategory: ['', Validators.required],\n      updateYear: ['', Validators.required]\n    });\n  }\n  logout() {\n    this.accountService.logout();\n  }\n  OnClick(event) {\n    this.add = true;\n    this.isUpdate = false;\n  }\n\n  onUpdate(id) {\n    this.id = id;\n    this.isUpdate = true;\n    this.add = false;\n    window.scrollTo(0, 0);\n  }\n  onDelete(id) {\n    this.store.dispatch(new DeleteLink(id));\n    this.store.dispatch(new FetchUserData());\n  }\n\n  onCancel() {\n    this.add = false;\n    this.isUpdate = false;\n  }\n\n  onUpdateLink() {\n    this.submitted = true;\n    if (this.updateForm.invalid) {\n      return;\n    }\n    const requestBody = {\n      id: this.id,\n      title: this.updateForm.value.updateTitle,\n      description: this.updateForm.value.updateDesc,\n      year: this.updateForm.value.updateYear,\n      category: this.updateForm.value.updateCategory\n    };\n    this.store.dispatch(new UpdateLink(this.id, requestBody));\n    this.store.dispatch(new FetchUserData());\n    this.isUpdate = false;\n  }\n\n  get f() { return this.form.controls; }\n\n  get fc() { return this.updateForm.controls; }\n\n  onSubmit() {\n    this.submitted = true;\n    this.id = null;\n    if (this.form.invalid) {\n      return;\n    }\n    this.add = false;\n    const myId = uuid.v4();\n    const requestBody = {\n      id: myId,\n      title: this.form.value.title,\n      description: this.form.value.desc,\n      category: this.form.value.category,\n      year: this.form.value.releaseDate\n    };\n    this.store.dispatch(new SaveSharedLinks(requestBody));\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';\nimport { Observable } from 'rxjs';\nimport { selectIsLoggedIn, selectData } from 'src/app/store/app.selector';\nimport { AccountService } from 'src/app/services';\nimport { Store } from '@ngrx/store';\nimport { AppState } from 'src/app/app.model';\nimport * as uuid from 'uuid';\nimport { FetchUserData, IsLoggedIn, DeleteLink, UpdateLink, SaveSharedLinks } from 'src/app/store/app.actions';\n\n@Component({\n  selector: 'app-login-user',\n  templateUrl: './login-user.component.html',\n  styleUrls: ['./login-user.component.scss']\n})\nexport class LoginUserComponent implements OnInit {\n\n  form: FormGroup;\n  updateForm: FormGroup;\n  isUserLoggedIn: boolean;\n  add = false;\n  darkTheme = new FormControl(false);\n  submitted = false;\n  isUpdate = false;\n  public id = null;\n  public selectIsLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);\n  public selectData$: Observable<any> = this.store.select(selectData);\n  constructor(\n    private accountService: AccountService,\n    public store: Store<AppState>,\n    private formBuilder: FormBuilder) {\n    this.store.dispatch(new FetchUserData());\n    this.store.dispatch(new IsLoggedIn(true));\n    this.selectIsLoggedIn$.subscribe(val => {\n      this.isUserLoggedIn = val;\n    });\n\n  }\n\n  ngOnInit(): void {\n    this.form = this.formBuilder.group({\n      title: ['', Validators.required],\n      desc: ['', Validators.required],\n      category: ['', Validators.required],\n      releaseDate: ['', Validators.required]\n    });\n\n    this.updateForm = this.formBuilder.group({\n      updateTitle: ['', Validators.required],\n      updateDesc: ['', Validators.required],\n      updateCategory: ['', Validators.required],\n      updateYear: ['', Validators.required]\n    });\n  }\n  logout() {\n    this.accountService.logout();\n  }\n  OnClick() {\n    this.add = true;\n    this.isUpdate = false;\n  }\n\n  onUpdate(id) {\n    this.id = id;\n    this.isUpdate = true;\n    this.add = false;\n    window.scrollTo(0, 0);\n  }\n  onDelete(id) {\n    this.store.dispatch(new DeleteLink(id));\n    this.store.dispatch(new FetchUserData());\n  }\n\n  onCancel() {\n    this.add = false;\n    this.isUpdate = false;\n  }\n\n  onUpdateLink() {\n    this.submitted = true;\n    if (this.updateForm.invalid) {\n      return;\n    }\n    const requestBody = {\n      id: this.id,\n      title: this.updateForm.value.updateTitle,\n      description: this.updateForm.value.updateDesc,\n      year: this.updateForm.value.updateYear,\n      category: this.updateForm.value.updateCategory\n    };\n    this.store.dispatch(new UpdateLink(this.id, requestBody));\n    this.store.dispatch(new FetchUserData());\n    this.isUpdate = false;\n  }\n\n  get f() { return this.form.controls; }\n\n  get fc() { return this.updateForm.controls; }\n\n  onSubmit() {\n    this.submitted = true;\n    this.id = null;\n    if (this.form.invalid) {\n      return;\n    }\n    this.add = false;\n    const myId = uuid.v4();\n    const requestBody = {\n      id: myId,\n      title: this.form.value.title,\n      description: this.form.value.desc,\n      category: this.form.value.category,\n      year: this.form.value.releaseDate\n    };\n    this.store.dispatch(new SaveSharedLinks(requestBody));\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\r\n    background-color: var(--primary-color);\r\n    color: var(--text-color);\r\n  }\r\n  .item1 {\r\n    grid-area: header;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    background-color: #1abc9c;\r\n    height: 80px;\r\n    .head-line {\r\n      display: flex;\r\n      justify-content: space-between;\r\n      width: 17rem;\r\n      h1 {\r\n        @media screen and (min-width: 320px) and (max-width: 480px) {\r\n          font-size: 14px;\r\n          margin-top: 1.5rem;\r\n        }\r\n      }\r\n      img {\r\n        margin-top: .5rem;\r\n        margin-right: 5rem;\r\n      }\r\n    }\r\n    .btns {\r\n      display: flex;\r\n      flex-flow: row;\r\n      margin: 1rem;\r\n      .btn-logout {\r\n        margin: 1rem 1rem;\r\n        cursor: pointer;\r\n      }\r\n      .btn-add {\r\n        margin: 0.2rem 1rem;\r\n        cursor: pointer;\r\n      }\r\n    }\r\n  }\r\n  \r\n  body {\r\n    font-family: Arial, Helvetica, sans-serif;\r\n  }\r\n  form {\r\n    border: 3px solid #f1f1f1;\r\n  }\r\n  .item2 {\r\n    input[type=\"text\"],\r\n    input[type=\"password\"] {\r\n      width: 100%;\r\n      padding: 12px 20px;\r\n      margin: 8px 0;\r\n      display: inline-block;\r\n      border: 1px solid #ccc;\r\n      box-sizing: border-box;\r\n    }\r\n  \r\n    button {\r\n      background-color: #1abc9c;\r\n      color: white;\r\n      padding: 14px 20px;\r\n      margin: 8px 0;\r\n      border: none;\r\n      cursor: pointer;\r\n      width: 100%;\r\n    }\r\n  \r\n    .btn-cancel {\r\n      background-color: lightsalmon;\r\n      color: white;\r\n      padding: 14px 20px;\r\n      margin: 8px 0;\r\n      border: none;\r\n      cursor: pointer;\r\n      width: 100%;\r\n    }\r\n  \r\n    .btn-reg:hover {\r\n      opacity: 0.8;\r\n    }\r\n  \r\n    button:hover {\r\n      opacity: 0.8;\r\n    }\r\n  \r\n    .cancelbtn {\r\n      width: auto;\r\n      padding: 10px 18px;\r\n      background-color: #f44336;\r\n    }\r\n  \r\n    .imgcontainer {\r\n      text-align: center;\r\n      margin: 24px 0 12px 0;\r\n    }\r\n  \r\n    img.avatar {\r\n      width: 40%;\r\n      border-radius: 50%;\r\n    }\r\n  \r\n    .container {\r\n      padding: 16px;\r\n    }\r\n  \r\n    span.psw {\r\n      float: right;\r\n      padding-top: 16px;\r\n    }\r\n  }\r\n  .item3 {\r\n    grid-area: main;\r\n    display: grid;\r\n    width: 100%;\r\n    column-width: 19em;\r\n    -webkit-column-width: 19em;\r\n    column-gap: 1em;\r\n    -webkit-column-gap: 1em;\r\n  }\r\n  .item4 {\r\n    grid-area: right;\r\n  }\r\n  .item5 {\r\n    grid-area: footer;\r\n  }\r\n  \r\n  .grid-container {\r\n    display: grid;\r\n    grid-template-areas:\r\n      \"header header header header header header\"\r\n      \"menu menu menu menu menu menu\"\r\n      \"main main main main main main\"\r\n      \"footer footer footer footer footer footer\";\r\n    grid-gap: 10px;\r\n    //   background-color: #2196F3;\r\n    padding: 10px;\r\n  }\r\n  \r\n  .grid-container > div {\r\n    //   background-color: rgba(255, 255, 255, 0.8);\r\n    text-align: center;\r\n    padding: 20px 0;\r\n    font-size: 30px;\r\n  }\r\n  ",
+                    "data": ":host {\r\n  background-color: var(--primary-color);\r\n  color: var(--text-color);\r\n}\r\n.item1 {\r\n  grid-area: header;\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  padding: 1rem;\r\n}\r\n\r\nbody {\r\n  font-family: Arial, Helvetica, sans-serif;\r\n}\r\nform {\r\n  border: 3px solid #f1f1f1;\r\n}\r\n.item2 {\r\n  input[type=\"text\"],\r\n  input[type=\"password\"] {\r\n    width: 100%;\r\n    padding: 12px 20px;\r\n    margin: 8px 0;\r\n    display: inline-block;\r\n    border: 1px solid #ccc;\r\n    box-sizing: border-box;\r\n  }\r\n\r\n  button {\r\n    background-color: #1abc9c;\r\n    color: white;\r\n    padding: 14px 20px;\r\n    margin: 8px 0;\r\n    border: none;\r\n    cursor: pointer;\r\n    width: 100%;\r\n  }\r\n\r\n  .btn-cancel {\r\n    background-color: lightsalmon;\r\n    color: white;\r\n    padding: 14px 20px;\r\n    margin: 8px 0;\r\n    border: none;\r\n    cursor: pointer;\r\n    width: 100%;\r\n  }\r\n\r\n  .btn-reg:hover {\r\n    opacity: 0.8;\r\n  }\r\n\r\n  button:hover {\r\n    opacity: 0.8;\r\n  }\r\n\r\n  .cancelbtn {\r\n    width: auto;\r\n    padding: 10px 18px;\r\n    background-color: #f44336;\r\n  }\r\n\r\n  .imgcontainer {\r\n    text-align: center;\r\n    margin: 24px 0 12px 0;\r\n  }\r\n\r\n  img.avatar {\r\n    width: 40%;\r\n    border-radius: 50%;\r\n  }\r\n\r\n  .container {\r\n    padding: 16px;\r\n  }\r\n\r\n  span.psw {\r\n    float: right;\r\n    padding-top: 16px;\r\n  }\r\n}\r\n.item3 {\r\n  grid-area: main;\r\n  display: grid;\r\n  width: 100%;\r\n  column-width: 19em;\r\n  -webkit-column-width: 19em;\r\n  column-gap: 1em;\r\n  -webkit-column-gap: 1em;\r\n}\r\n.item4 {\r\n  grid-area: right;\r\n}\r\n.item5 {\r\n  grid-area: footer;\r\n}\r\n\r\n.grid-container {\r\n  display: grid;\r\n  grid-template-areas:\r\n    \"header header header header header header\"\r\n    \"menu menu menu menu menu menu\"\r\n    \"main main main main main main\"\r\n    \"footer footer footer footer footer footer\";\r\n  grid-gap: 10px;\r\n  //   background-color: #2196F3;\r\n  padding: 10px;\r\n}\r\n\r\n.grid-container > div {\r\n  //   background-color: rgba(255, 255, 255, 0.8);\r\n  text-align: center;\r\n  padding: 20px 0;\r\n  font-size: 30px;\r\n}\r\n\r\n::ng-deep .text-btn {\r\n  background-color: #267483;\r\n}\r\n",
                     "styleUrl": "./login-user.component.scss"
                 }
             ],
@@ -2912,7 +2898,7 @@
                         "name": "f",
                         "type": "",
                         "returnType": "",
-                        "line": 98
+                        "line": 96
                     }
                 },
                 "fc": {
@@ -2921,11 +2907,70 @@
                         "name": "fc",
                         "type": "",
                         "returnType": "",
-                        "line": 100
+                        "line": 98
                     }
                 }
             },
-            "templateData": "<div>\n    <div *ngIf=\"add\" class=\"item2\">\n        <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n            <div class=\"container\">\n                <label>Title</label>\n                <input type=\"text\" formControlName=\"title\" />\n                <div *ngIf=\"submitted && f.title.errors\">\n                    <div *ngIf=\"f.title.errors.required\">Title is required</div>\n                </div>\n                <label>Description</label>\n                <input type=\"text\" formControlName=\"desc\" />\n                <div *ngIf=\"submitted && f.desc.errors\">\n                    <div *ngIf=\"f.desc.errors.required\">Description is required</div>\n                </div>\n                <label>Category</label>\n                <input type=\"text\" formControlName=\"category\" />\n                <div *ngIf=\"submitted && f.category.errors\">\n                    <div *ngIf=\"f.category.errors.required\">Category is required</div>\n                </div>\n                <label>Release Date</label>&nbsp;&nbsp;\n                <input type=\"date\" formControlName=\"releaseDate\" />\n                <div *ngIf=\"submitted && f.releaseDate.errors\">\n                    <div *ngIf=\"f.releaseDate.errors.required\">Release Date is required</div>\n                </div>\n                <button>\n                    Add\n                </button>\n                <button class=\"btn-cancel\" (click) = \"onCancel()\">Cancel</button>\n            </div>\n               \n        </form>\n    </div>\n    <div *ngIf=\"isUpdate\" class=\"item2\">\n        <form [formGroup]=\"updateForm\" (ngSubmit)=\"onUpdateLink()\" >\n            <div class=\"container\">\n                <label>Title</label>\n                <input type=\"text\" formControlName=\"updateTitle\" />\n                <div *ngIf=\"submitted && fc.updateTitle.errors\">\n                    <div *ngIf=\"fc.updateTitle.errors.required\">Title is required</div>\n                </div>\n                <label>Description</label>\n                <input type=\"text\" formControlName=\"updateDesc\" />\n                <div *ngIf=\"submitted && fc.updateDesc.errors\">\n                    <div *ngIf=\"fc.updateDesc.errors.required\">Description is required</div>\n                </div>\n                <label>Category</label>\n                <input type=\"text\" formControlName=\"updateCategory\" />\n                <div *ngIf=\"submitted && fc.updateCategory.errors\">\n                    <div *ngIf=\"fc.updateCategory.errors.required\">Category is required</div>\n                </div>\n                <label>Release Date</label>&nbsp;&nbsp;\n                <input type=\"date\" formControlName=\"updateYear\" />\n                <div *ngIf=\"submitted && fc.updateYear.errors\">\n                    <div *ngIf=\"fc.updateYear.errors.required\">Release Date is required</div>\n                </div>\n                <button>\n                    Update\n                </button>\n                <button class=\"btn-cancel\" (click) = \"onCancel()\">Cancel</button>\n            </div>\n        </form>\n    </div>\n    <section>\n        <div *ngFor=\"let data of (selectData$ | async)\">\n            <div>\n                <div>\n                    <app-card title=\"{{data.title}}\" desc=\"{{data.description}}\" category=\"{{data.category}}\"\n                        year=\"{{data.year}}\" isLoggedIn = \"isUserLoggedIn\" id = \"{{data.id}}\" (change) = \"onUpdate($event)\" (delete) = \"onDelete($event)\" (add) = \"OnClick($event)\">\n                    </app-card>\n                </div>\n            </div>\n        </div>\n    </section>\n</div>"
+            "templateData": "<div>\n    <div class=\"item1\">\n        <sa-button  [buttonConfig]=\"{text: 'Add Movies'}\" (click) = \"OnClick()\"></sa-button>\n    </div>\n    <div *ngIf=\"add\" class=\"item2\">\n        <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n            <div class=\"container\">\n                <label>Title</label>\n                <input type=\"text\" formControlName=\"title\" />\n                <div *ngIf=\"submitted && f.title.errors\">\n                    <div *ngIf=\"f.title.errors.required\">Title is required</div>\n                </div>\n                <label>Description</label>\n                <input type=\"text\" formControlName=\"desc\" />\n                <div *ngIf=\"submitted && f.desc.errors\">\n                    <div *ngIf=\"f.desc.errors.required\">Description is required</div>\n                </div>\n                <label>Category</label>\n                <input type=\"text\" formControlName=\"category\" />\n                <div *ngIf=\"submitted && f.category.errors\">\n                    <div *ngIf=\"f.category.errors.required\">Category is required</div>\n                </div>\n                <label>Release Date</label>&nbsp;&nbsp;\n                <input type=\"date\" formControlName=\"releaseDate\" />\n                <div *ngIf=\"submitted && f.releaseDate.errors\">\n                    <div *ngIf=\"f.releaseDate.errors.required\">Release Date is required</div>\n                </div>\n                <button>\n                    Add\n                </button>\n                <button class=\"btn-cancel\" (click)=\"onCancel()\">Cancel</button>\n            </div>\n\n        </form>\n    </div>\n    <div *ngIf=\"isUpdate\" class=\"item2\">\n        <form [formGroup]=\"updateForm\" (ngSubmit)=\"onUpdateLink()\">\n            <div class=\"container\">\n                <label>Title</label>\n                <input type=\"text\" formControlName=\"updateTitle\" />\n                <div *ngIf=\"submitted && fc.updateTitle.errors\">\n                    <div *ngIf=\"fc.updateTitle.errors.required\">Title is required</div>\n                </div>\n                <label>Description</label>\n                <input type=\"text\" formControlName=\"updateDesc\" />\n                <div *ngIf=\"submitted && fc.updateDesc.errors\">\n                    <div *ngIf=\"fc.updateDesc.errors.required\">Description is required</div>\n                </div>\n                <label>Category</label>\n                <input type=\"text\" formControlName=\"updateCategory\" />\n                <div *ngIf=\"submitted && fc.updateCategory.errors\">\n                    <div *ngIf=\"fc.updateCategory.errors.required\">Category is required</div>\n                </div>\n                <label>Release Date</label>&nbsp;&nbsp;\n                <input type=\"date\" formControlName=\"updateYear\" />\n                <div *ngIf=\"submitted && fc.updateYear.errors\">\n                    <div *ngIf=\"fc.updateYear.errors.required\">Release Date is required</div>\n                </div>\n                <button>\n                    Update\n                </button>\n                <button class=\"btn-cancel\" (click)=\"onCancel()\">Cancel</button>\n            </div>\n        </form>\n    </div>\n    <section>\n        <div *ngFor=\"let data of (selectData$ | async)\">\n            <div>\n                <div>\n                    <app-card title=\"{{data.title}}\" desc=\"{{data.description}}\" category=\"{{data.category}}\"\n                        year=\"{{data.year}}\" isLoggedIn=\"isUserLoggedIn\" id=\"{{data.id}}\" (change)=\"onUpdate($event)\"\n                        (delete)=\"onDelete($event)\" (add)=\"OnClick($event)\">\n                    </app-card>\n                </div>\n            </div>\n        </div>\n    </section>\n</div>"
+        },
+        {
+            "name": "ModalComponent",
+            "id": "component-ModalComponent-f4d7720a1c1a7f1df0df1431a7f56e90",
+            "file": "src/app/shared/modal/modal.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-modal",
+            "styleUrls": [
+                "./modal.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./modal.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "showModal",
+                    "defaultValue": "null",
+                    "description": "<p>The showModal to set state.</p>\n",
+                    "line": 18,
+                    "type": "boolean"
+                },
+                {
+                    "name": "title",
+                    "line": 12,
+                    "type": "string"
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "closeModal",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "description": "<p>When the close icon or grey overlay area is clicked.</p>\n",
+                    "line": 24,
+                    "type": "EventEmitter<Event>"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\n\r\n\r\n@Component({\r\n    selector: 'app-modal',\r\n    templateUrl: './modal.component.html',\r\n    styleUrls: ['./modal.component.scss']\r\n})\r\nexport class ModalComponent {\r\n   \r\n    @Input()\r\n    public title: string;\r\n\r\n    /**\r\n     * The showModal to set state.\r\n     */\r\n    @Input()\r\n    public showModal: boolean = null;\r\n\r\n    /**\r\n     * When the close icon or grey overlay area is clicked.\r\n     */\r\n    @Output()\r\n    public closeModal: EventEmitter<Event> = new EventEmitter<Event>();\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "\r\n$cls: '.app-modal';\r\n#{$cls} {\r\n  &__container {\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    z-index: 99;\r\n  }\r\n  &__body {\r\n    background-color: white;\r\n    z-index: 99;\r\n    min-width: 50rem;\r\n    max-width: 128rem;\r\n    min-height: 30rem;\r\n    position: absolute;\r\n    padding: 3rem;\r\n    border-radius: 0.5rem;\r\n    // .modal-title {\r\n    //   @include fontSize(700);\r\n    // }\r\n    .close {\r\n      background: transparent;\r\n      top: 2rem;\r\n      right: 2rem;\r\n      position: absolute;\r\n      cursor: pointer;\r\n      color: color(greys, 600);\r\n    }\r\n  }\r\n  &__bg-overlay {\r\n    background: rgba(106, 115, 118, 0.4);\r\n    position: absolute;\r\n    left: 0;\r\n    top: 0;\r\n    width: 100%;\r\n    height: 100vh;\r\n    z-index: 9;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    cursor: pointer;\r\n  }\r\n}\r\n",
+                    "styleUrl": "./modal.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div class=\"sa-modal__container\" *ngIf=\"showModal\">\r\n    <div class=\"sa-modal__body\">\r\n        <div class=\"modal-title\">{{title}}</div>\r\n        <ng-content></ng-content>\r\n        <a (click)=\"closeModal.emit()\" class=\"close\">\r\n            <sa-icon [name]=\"Icon.Close\" [size]=\"IconSize._200\"></sa-icon>\r\n        </a>\r\n    </div>\r\n    <a (click)=\"closeModal.emit()\" *ngIf=\"showModal\" class=\"sa-modal__bg-overlay\"></a>\r\n</div>\r\n"
         },
         {
             "name": "RegisterComponent",
@@ -4069,6 +4114,15 @@
                 "coveragePercent": 0,
                 "coverageCount": "0/6",
                 "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/modal/modal.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ModalComponent",
+                "coveragePercent": 50,
+                "coverageCount": "2/4",
+                "status": "medium"
             },
             {
                 "filePath": "src/app/shared/toggle/toggle.component.ts",

@@ -4,4 +4,5 @@ export class AppModelState {
     requestBody: any;
     id: any;
     error: any;
+    showModal: boolean;
 }

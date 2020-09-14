@@ -27,9 +27,7 @@ export class CardComponent implements OnInit {
     public selectIsLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);
     constructor(  public store: Store<AppState>) { }
 
-    ngOnInit() {
-        console.log(this.isLoggedIn, 'islogin');
-        
+    ngOnInit() {   
     }
     update() {
         this.change.emit(this.id);

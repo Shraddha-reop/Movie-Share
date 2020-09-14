@@ -30,6 +30,11 @@ export function appReducer(state: AppModelState = new AppModelState(), action: A
                 ...state,
                 error: action.err
             };
+        case AppActionType.SHOW_MODAL:
+            return {
+                ...state,
+                showModal: action.showModal
+            };
         default: {
             return state;
         }

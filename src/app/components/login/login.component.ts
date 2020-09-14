@@ -6,6 +6,8 @@ import { first } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.model';
 import { IsLoggedIn, UserLogin } from 'src/app/store/app.actions';
+import { Observable } from 'rxjs';
+import { selectModal } from '../../store/app.selector';
 
 @Component({
     selector: 'app-login',
@@ -17,6 +19,9 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     public error;
+    public selectData$: Observable<any> = this.store.select(selectModal);
+
+    public modal = true;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -32,6 +37,19 @@ export class LoginComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
+
+        this.selectData$.subscribe(data => {
+            this.modal = data;
+            console.log(data);
+        });
+    }
+
+    OpenModal() {
+        this.modal = true;
+    }
+
+    onPinModalClose() {
+        this.modal = false;
     }
 
 
@@ -42,15 +60,17 @@ export class LoginComponent implements OnInit {
         if (this.form.invalid) {
             return;
         }
+
         this.accountService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
             .subscribe({
                 next: () => {
+                    this.modal = false;
                     this.router.navigate(['/login-user']);
                     this.store.dispatch(new IsLoggedIn(true));
                 },
                 error: error => {
-                   this.error = error;
+                    this.error = error;
                 }
             });
     }

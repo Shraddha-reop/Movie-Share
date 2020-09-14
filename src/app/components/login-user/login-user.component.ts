@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { selectIsLoggedIn, selectData } from 'src/app/store/app.selector';
+import { selectIsLoggedIn, selectData, selectModal } from 'src/app/store/app.selector';
 import { AccountService } from 'src/app/services';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.model';
@@ -23,6 +23,7 @@ export class LoginUserComponent implements OnInit {
   submitted = false;
   isUpdate = false;
   public id = null;
+  public selectModal$: Observable<any> = this.store.select(selectModal);
   public selectIsLoggedIn$: Observable<boolean> = this.store.select(selectIsLoggedIn);
   public selectData$: Observable<any> = this.store.select(selectData);
   constructor(
@@ -32,9 +33,7 @@ export class LoginUserComponent implements OnInit {
     this.store.dispatch(new FetchUserData());
     this.store.dispatch(new IsLoggedIn(true));
     this.selectIsLoggedIn$.subscribe(val => {
-      console.log(val);
       this.isUserLoggedIn = val;
-      console.log(this.isUserLoggedIn);
     });
 
   }
@@ -57,7 +56,7 @@ export class LoginUserComponent implements OnInit {
   logout() {
     this.accountService.logout();
   }
-  OnClick(event) {
+  OnClick() {
     this.add = true;
     this.isUpdate = false;
   }
@@ -68,6 +67,7 @@ export class LoginUserComponent implements OnInit {
     this.add = false;
     window.scrollTo(0, 0);
   }
+
   onDelete(id) {
     this.store.dispatch(new DeleteLink(id));
     this.store.dispatch(new FetchUserData());
@@ -98,6 +98,11 @@ export class LoginUserComponent implements OnInit {
   get f() { return this.form.controls; }
 
   get fc() { return this.updateForm.controls; }
+
+  onPinModalClose() {
+    this.add = false;
+    this.isUpdate = false;
+}
 
   onSubmit() {
     this.submitted = true;

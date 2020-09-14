@@ -10,6 +10,7 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { ButtonComponent } from 'src/app/shared/button/button.component';
 import { AppState } from 'src/app/app.model';
 import { Store } from '@ngrx/store';
+import { ModalComponent } from 'src/app/shared/modal/modal.component';
 
 const spyScrollTo = jest.fn();
 
@@ -32,7 +33,7 @@ describe('LoginUserComponent', () => {
     Object.defineProperty(global.window, 'scrollY', { value: 1 });
     spyScrollTo.mockClear();
     await TestBed.configureTestingModule({
-      declarations: [LoginUserComponent, CardComponent, ButtonComponent],
+      declarations: [LoginUserComponent, CardComponent, ButtonComponent, ModalComponent],
       imports: [FormsModule,
         ReactiveFormsModule,
         RouterTestingModule,
@@ -91,13 +92,13 @@ describe('LoginUserComponent', () => {
     expect(spy).toHaveBeenCalledTimes(0);
   });
 
-  // it('should add user', () => {
-  //   const spy = jest.fn();
-  //   component.OnClick(event);
-  //   expect(component.isUpdate).toEqual(false);
-  //   expect(component.add).toEqual(true);
-  //   expect(spy).toHaveBeenCalledTimes(0);
-  // });
+  it('should add user', () => {
+    const spy = jest.fn();
+    component.OnClick();
+    expect(component.isUpdate).toEqual(false);
+    expect(component.add).toEqual(true);
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
 
   it('should cancel user', () => {
     const spy = jest.fn();
@@ -140,8 +141,37 @@ describe('LoginUserComponent', () => {
     expect(component.submitted).toEqual(true);
     expect(component.form.valid).toBeTruthy();
     expect(component.add).toEqual(false);
-    console.log(component.form.status);
     expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should get form controls', () => {
+    const titleInput = component.updateForm.controls.updateTitle;
+    const descInput = component.updateForm.controls.updateDesc;
+    const categoryInput = component.updateForm.controls.updateCategory;
+    const releaseDateInput = component.updateForm.controls.updateYear;
+    titleInput.setValue('Movie Title');
+    descInput.setValue('Movie Desc');
+    categoryInput.setValue('Action');
+    releaseDateInput.setValue('2020');
+    expect(component.fc.updateTitle.value).toEqual('Movie Title');
+    expect(component.fc.updateDesc.value).toEqual('Movie Desc');
+    expect(component.fc.updateCategory.value).toEqual('Action');
+    expect(component.fc.updateYear.value).toEqual('2020');
+  });
+
+  it('should get form controls', () => {
+    const titleInput = component.form.controls.title;
+    const descInput = component.form.controls.desc;
+    const categoryInput = component.form.controls.category;
+    const releaseDateInput = component.form.controls.releaseDate;
+    titleInput.setValue('Movie Title');
+    descInput.setValue('Movie Desc');
+    categoryInput.setValue('Action');
+    releaseDateInput.setValue('2020');
+    expect(component.f.title.value).toEqual('Movie Title');
+    expect(component.f.desc.value).toEqual('Movie Desc');
+    expect(component.f.category.value).toEqual('Action');
+    expect(component.f.releaseDate.value).toEqual('2020');
   });
 
 });
