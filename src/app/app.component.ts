@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'movieShare';
+  title = 'movieSharejkhjbjkkb';
   name = 'Angular and LitElement';
 }
