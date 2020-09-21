@@ -1,0 +1,79 @@
+:host{
+    --input-field-font-family: var(--global-font-family);
+    --input-field-font-color: var(--secondary-text);
+    --input-field-font-weight: var(--font-weight-regular);
+    --input-field-label-position: absolute;
+}
+
+:root{
+    --input-field-min-height: 48px;
+    --input-field-height: 48px;
+    --input-field-max-width: 100%
+    --input-field-min-width: 136px
+    --border-radius:4px;
+    --border-thickness: 1px;
+    --input-field-default-border-color: #13294E
+    --input-filed-letter-spacing : 0;
+    --font-weight-regular: 400;
+    --font-weight-semibold: 600;
+    --label-backgroung-color: white;
+    --input-field-font-family: sans-serif;
+    --input-field-label-padding: 0 4px;
+    --input-field-label-margin: -2.3rem 0px 0px 1.4rem;
+    --input-field-label-font-size: 1.4rem;
+    --input-field-line-height: 1.5rem;
+    --input-field-placeholder-font-size: 1.6rem;
+    --error-message-font-size: 1.2rem;
+}
+
+$input-field-font-size: 1.2rem;
+$border-radius:4px;
+$border-thickness: 1px;
+$primary:#238738;
+$secondary:#0A57A1;
+$tertiary:#13294E;
+$error:#D9222A;
+$primary-text:#242C38;
+$secondary-text:#505660;
+$tertiary-text:#6A7078;
+$disabled-text:#969DA4;
+$error-text:#D9222A;
+$primary-font: sans-serif;
+
+@mixin placeholder {
+    font: var(--input-field-font-family);
+    font-size: var(--input-field-placeholder-font-size);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--input-field-line-height);
+    letter-spacing: var(--input-filed-letter-spacing);
+  }
+
+@mixin field-label {
+    position: var(--input-field-label-position);
+    background-color: var(--label-backgroung-color);
+    font-family: var(--input-field-font-family);
+    color: $secondary;
+    font-size: var(--input-field-label-font-size);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--input-field-line-height);
+    letter-spacing: var(--input-filed-letter-spacing);
+    padding: var(--input-field-label-padding);
+    margin: var(--input-field-label-margin);
+} 
+
+@mixin input-text {
+    color: $primary-text;
+    font: var(--input-field-font-family);
+    font-size:var(--input-field-placeholder-font-size);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--input-field-line-height);
+    letter-spacing: var(--input-filed-letter-spacing);
+}
+
+@mixin error-message {
+    color: $error-text;
+    font-size: var(--error-message-font-size);
+    font-weight: var(--font-weight-semibold);
+    margin: 1rem;
+}
+

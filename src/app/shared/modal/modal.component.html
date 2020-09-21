@@ -1,9 +1,0 @@
-<div class="app-modal__container" *ngIf="showModal">
-    <div class="app-modal__body">
-        <div class="modal-title">{{title}}</div>
-        <ng-content></ng-content>
-        <a (click)="closeModal.emit()" class="close">Close
-        </a>
-    </div>
-    <a (click)="closeModal.emit()" *ngIf="showModal" class="app-modal__bg-overlay"></a>
-</div>

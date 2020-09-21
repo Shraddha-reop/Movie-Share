@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
+
+  <title>Orxe3 Components</title>
+
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" type="text/css" href="https://components.qa.cnxloyalty.com/theme/css/imports.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.3.0/custom-elements-es5-adapter.js"></script>
+
+</head>
+
+<body>
+  <style>
+    body {
+      background-color: white;
+    }
+
+    .input-field-conatiner {
+      display: grid;
+      grid-template-columns: auto auto;
+      width: 100%;
+
+
+    }
+
+    .split-input-field {
+      display: grid;
+      grid-template-columns: auto auto;
+    }
+  </style>
+  <div class="input-field-conatiner">
+    <div>
+      <h1>Input-Default</h1>
+      <orxe-input-field></orxe-input-field><br><br>
+    </div>
+    <div>
+      <h1>Input-On-Focus</h1>
+      <orxe-input-field state="on-Focus" field-label="On-Focus"></orxe-input-field><br><br>
+    </div>
+    <div>
+      <h1>Input-Active</h1>
+      <orxe-input-field state="active" field-label="Active" value = "Input text"  a11y-close-label='close the card' close-icon>
+      </orxe-input-field><br><br>
+    </div>
+    <div>
+      <h1>Input-Filled</h1>
+      <orxe-input-field state="filled" value = "Input text" field-label="Filled"></orxe-input-field><br><br>
+    </div>
+    <div>
+      <h1>Input-Error</h1>
+      <orxe-input-field state="error" field-label="Error" error></orxe-input-field><br><br>
+    </div>
+    <div>
+      <h1>Input-Split</h1>
+      <div class="split-input-field">
+        <orxe-input-field></orxe-input-field>
+        <orxe-input-field></orxe-input-field>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

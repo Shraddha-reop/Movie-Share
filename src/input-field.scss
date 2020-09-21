@@ -1,0 +1,102 @@
+@import "./input-field-map.scss";
+
+.input-field {
+  background-color: var(--input-field-background-color);
+  padding: var(--spacing-05);
+  font-family: var(--input-field-font-family);
+  font-size: $input-field-font-size;
+  max-width: var(--input-field-max-width);
+  min-width: var(--input-field-min-width);
+  height: var(--input-field-height);
+  border: var(--border-thickness) solid $tertiary;
+  border-radius: var(--border-radius);
+  display: flex;
+  margin: 1rem;
+
+  .form-control {
+    border: none;
+    width: 100%;
+    height: var(--input-field-height);
+    color: $primary-text;
+    font-size: 1.6rem;
+    font-weight: var(--font-weight-regular);
+    line-height: 1.5rem;
+    letter-spacing: var(--input-filed-letter-spacing);
+  }
+
+  .form-control:focus {
+    outline: none;
+  }
+
+  .field-label {
+    @include field-label;
+  }
+  ::placeholder {
+    color: $disabled-text;
+    @include placeholder;
+  }
+
+  &[state="on-Focus"] {
+    border: 2px solid $secondary;
+    border-radius: var(--border-radius);
+    .field-label {
+      @include field-label;
+    }
+    ::placeholder {
+      color: $disabled-text;
+      @include placeholder;
+    }
+  }
+
+  &[state="active"] {
+    border: 2px solid $secondary;
+    border-radius: var(--border-radius);
+    input[type="text"] {
+      @include input-text;
+    }
+    .field-label {
+      @include field-label;
+    }
+    ::placeholder {
+      color: $primary-text;
+      @include placeholder;
+    }
+    .button__icon--close {
+      --button-icon-color: var(--card-close-icon-color);
+      cursor: pointer;
+      background-color: inherit;
+    }
+  }
+
+  &[state="filled"] {
+    border: 1px solid $tertiary-text;
+    border-radius: var(--border-radius);
+    input[type="text"] {
+      @include input-text;
+    }
+    .field-label {
+      @include field-label;
+    }
+    ::placeholder {
+      @include placeholder;
+      color: $primary-text;
+    }
+  }
+
+  &[state="error"] {
+    border: 2px solid $error-text;
+    border-radius: var(--border-radius);
+
+    .field-label {
+      @include field-label;
+    }
+    ::placeholder {
+      color: $disabled-text;
+      @include placeholder;
+    }
+  }
+}
+
+.error__message {
+   @include error-message;
+}
