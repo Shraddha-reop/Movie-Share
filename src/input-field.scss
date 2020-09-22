@@ -8,7 +8,7 @@
   max-width: var(--input-field-max-width);
   min-width: var(--input-field-min-width);
   height: var(--input-field-height);
-  border: var(--border-thickness) solid $tertiary;
+  border: var(--border-thickness) solid $tertiary-text;
   border-radius: var(--border-radius);
   display: flex;
   margin: 1rem;
@@ -62,7 +62,7 @@
       @include placeholder;
     }
     .button__icon--close {
-      --button-icon-color: var(--card-close-icon-color);
+      --button-icon-color: #6A7078;
       cursor: pointer;
       background-color: inherit;
     }

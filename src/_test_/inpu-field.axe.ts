@@ -6,13 +6,13 @@ expect.extend(toHaveNoViolations);
 describe('orxe-input-field', () => {
   let inputField;
 
-  beforeEach(function() {
+  beforeEach(function () {
     OrxeInputField;
     document.body.appendChild(document.createElement('orxe-input-field'));
     inputField = document.querySelector('orxe-input-field') as OrxeInputField;
   });
 
-  afterEach(function() {
+  afterEach(function () {
     inputField.remove();
   });
 

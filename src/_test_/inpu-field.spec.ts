@@ -44,10 +44,28 @@ describe('orxe-input-field', () => {
     expect(inputFieldConatiner).toHaveAttribute('state', 'default');
   });
 
-  it('Should set floating input field Type', async () => {
+  it('Should set  input field Type', async () => {
     await setProperties({ state: 'active' });
-    const cardConatiner = getByTestId('input-field-container');
-    expect(cardConatiner).toHaveAttribute('state', 'active');
+    const inputFieldConatiner = getByTestId('input-field-container');
+    expect(inputFieldConatiner).toHaveAttribute('state', 'active');
+  });
+
+  it('Should set  input field Type', async () => {
+    await setProperties({ state: 'error' });
+    const inputFieldConatiner = getByTestId('input-field-container');
+    expect(inputFieldConatiner).toHaveAttribute('state', 'error');
+  });
+
+  it('Should set  input field Type', async () => {
+    await setProperties({ state: 'filled' });
+    const inputFieldConatiner = getByTestId('input-field-container');
+    expect(inputFieldConatiner).toHaveAttribute('state', 'filled');
+  });
+
+  it('Should set  input field Type', async () => {
+    await setProperties({ state: 'on-focus' });
+    const inputFieldConatiner = getByTestId('input-field-container');
+    expect(inputFieldConatiner).toHaveAttribute('state', 'on-focus');
   });
 
   it('Should show close icon', async () => {
@@ -57,14 +75,6 @@ describe('orxe-input-field', () => {
     expect(closeIconContainer).toHaveAttribute('a11y-label', '');
 
     await setProperties({ a11yCloseLabel: 'close' });
-    // validate the value of a11y-close-label as given
     expect(closeIconContainer).toHaveAttribute('a11y-label', inputField.a11yCloseLabel);
-  });
-
-  it('Should show close the floating card when clicked on cross icon', async () => {
-    await setProperties({ state: 'active', closeIcon: true });
-    const closeIconContainer = getByTestId('close-icon');
-    await closeIconContainer.click();
-    expect(document.querySelector(`orxe-input-field`)).toBeFalsy();
   });
 });
